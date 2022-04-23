@@ -1,0 +1,766 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FRC.WPILib.CTRE</name>
+    </assembly>
+    <members>
+        <member name="T:CTRE.CANTalon">
+            <summary>
+            This Class represents a CAN Talon SRX Motor Controller.
+            </summary>
+        </member>
+        <member name="T:CTRE.CANTalon.FeedbackDevice">
+            <summary>
+            Feedback type for CAN Talon
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.QuadEncoder">
+            <summary>
+            A quadrature encoder.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.AnalogPotentiometer">
+            <summary>
+            An analog potentiometer.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.AnalogEncoder">
+            <summary>
+            An analog encoder.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.EncoderRising">
+            <summary>
+            An encoder that only reports when it hits a rising edge.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.EncoderFalling">
+            <summary>
+            An encoder that only reports when it hits a falling edge.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.CtreMagEncoderRelative">
+            <summary>
+            Relative magnetic encoder.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.CtreMagEncoderAbsolute">
+            <summary>
+            Absolute magnetic encoder
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDevice.PulseWidth">
+            <summary>
+            Encoder is a pulse width sensor.
+            </summary>
+        </member>
+        <member name="T:CTRE.CANTalon.StatusFrameRate">
+            <summary>
+            Status Rate for CAN Talon
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.StatusFrameRate.General">
+            <summary>
+            Requests a general status frame
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.StatusFrameRate.Feedback">
+            <summary>
+            Requests a feedback status frame
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.StatusFrameRate.QuadEncoder">
+            <summary>
+            Quad encoder status frame
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.StatusFrameRate.AnalogTempVbat">
+            <summary>
+            Analog temp vbat status frame.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.StatusFrameRate.PulseWidth">
+            <summary>
+            Pulse width status frame.
+            </summary>
+        </member>
+        <member name="T:CTRE.CANTalon.FeedbackDeviceStatus">
+            <summary>
+            The Feedback device status.
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDeviceStatus.FeedbackStatusUnknown">
+            <summary>
+            Status unknown
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent">
+            <summary>
+            Status present
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.FeedbackDeviceStatus.FeedbackStatusNotPresent">
+            <summary>
+            Status not present
+            </summary>
+        </member>
+        <member name="T:CTRE.CANTalon.SetValueMotionProfile">
+            <summary>
+            Enumerated types for Motion Control Set Values
+            </summary>
+            <remarks>
+            When in Motion Profile control mode, these constants are passed into <see cref="M:CTRE.CANTalon.Set(System.Double)"/> 
+            to manipulate the motion profile executer. When changing modes, be sure to read the value 
+            back using <see cref="M:CTRE.CANTalon.GetMotionProfileStatus"/> to ensure changes in output will take 
+            effect before performing buffering actions. <para/>Disable will signal Talon to put motor 
+            output into neutral drive. Talon will stop processing motion profile points.  This means 
+            the buffer is effectively disconnected from the executer, allowing the robot to gracefully 
+            clear and push new traj points. <see cref="P:CTRE.CANTalon.MotionProfileStatus.IsUnderrun"/> will get cleared. The active trajectory is also cleared.
+            <para/>
+            Enable will signal Talon to pop a trajectory point from it's buffer and process it. If the 
+            active trajectory is empty, Talon will shift in the next point. If the active traj is empty, 
+            and so is the buffer, the motor drive is neutral and <see cref="P:CTRE.CANTalon.MotionProfileStatus.IsUnderrun"/> is set. 
+            When active traj times out, and buffer has at least one point, Talon shifts in the next one, 
+            and <see cref="P:CTRE.CANTalon.MotionProfileStatus.IsUnderrun"/> is cleared. When active traj times out, and buffer is empty, 
+            Talon keeps processing active traj and sets <see cref="P:CTRE.CANTalon.MotionProfileStatus.IsUnderrun"/>
+            <para/>
+            Hold will signal Talon to keep processing the Active Trajectory indefinitely. 
+            If the active traj is cleared, Talon will neutral motor drive. Otherwise Talon 
+            will kepp processing the active traj but it will not shift in points from the buffer. 
+            This means the buffer is effectively disconnected from the executer, allowing the robot 
+            to gracefully clear and push new traj points. <see cref="P:CTRE.CANTalon.MotionProfileStatus.IsUnderrun"/> is set if active 
+            traj is empty, otherwise it is cleared.  <see cref="P:CTRE.CANTalon.TrajectoryPoint.IsLastPoint"/> signal is also cleared.
+            <para>
+            </para>
+            Typical Workflow:
+            <list class="bullet">
+            <listItem><para>Set(disable)</para></listItem>
+            <listItem><para>Confirm disable takes effect.</para></listItem>
+            <listItem><para>Clear buffer and push buffer points.</para></listItem>
+            <listItem><para>Set(enable) when enough points have been pushed to ensure no underruns,
+            wait for MP to finish or decide abort.</para></listItem>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:CTRE.CANTalon.SetValueMotionProfile.Disable">
+            <summary>
+            Disable the motion profile controller
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.SetValueMotionProfile.Enable">
+            <summary>
+            Enable the motion profile controller
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.SetValueMotionProfile.Hold">
+            <summary>
+            Hold the motion profile controller in the last valid state.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.MotionProfileStatus.IsUnderrun">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.Inverted">
+            <inheritdoc/>
+        </member>
+        <member name="F:CTRE.CANTalon.MaxTalonId">
+            <summary>
+            The max Id allowed for a CAN Talon
+            </summary>
+        </member>
+        <member name="F:CTRE.CANTalon.TalonIds">
+            <summary>
+            Resource list of all the talons that the program knows of and has control of.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.#ctor(System.Int32)">
+            <summary>
+            Constructs an new CANTalon object with default timing.
+            </summary>
+            <param name="deviceNumber">The id of the Talon SRX this object will communicate with.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructs a CANTalon object.
+            </summary>
+            <param name="deviceNumber">The id of the Talon SRX this object will communicate with.</param>
+            <param name="controlPeriodMs">The update period to the Talon SRX.  Defaults to 10ms.</param>
+            <param name="enablePeriodMs">The period in ms to send the enable control frame.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.SetParameter(CTRE.HALCanTalonSRX.ParamID,System.Double)">
+            <summary>
+            General set frame.
+            </summary>
+            <param name="paramEnum">The parameter to set.</param>
+            <param name="value">The value to set the parameter to.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.ReverseSensor(System.Boolean)">
+            <summary>
+            Sets whether to reverse the input sensor.
+            </summary>
+            <param name="flip">True to reverse, false to not</param>
+        </member>
+        <member name="M:CTRE.CANTalon.ReverseOutput(System.Boolean)">
+            <summary>
+            Sets whether to reverse the output.
+            </summary>
+            <param name="flip">True to reverse, false to not.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.GetEncoderPosition">
+            <summary>
+            Gets the current encoder position.
+            </summary>
+            <returns>The current encoder position.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.SetEncoderPostition(System.Int32)">
+            <summary>
+            Resets the encoder position to a specified point.
+            </summary>
+            <param name="newPosition">The new position to reset to.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.GetEncoderVelocity">
+            <summary>
+            Gets the current encoder velocity.
+            </summary>
+            <returns>The current encoder velocity</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPulseWidthPosition">
+            <summary>
+            Gets the pulse width postion.
+            </summary>
+            <returns>The pulse width position</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.SetPulseWidthPosition(System.Int32)">
+            <summary>
+            Resets the pulse width position to a specified point.
+            </summary>
+            <param name="newPosition">The new position to reset to.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPulseWidthVelocity">
+            <summary>
+            Gets the pulse width velocity.
+            </summary>
+            <returns>The pulse width velocity.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPulseWidthRiseToFallUs">
+            <summary>
+            Gets the pulse width rise to fall time.
+            </summary>
+            <returns>The pulse width time in microseconds.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPulseWidthRiseToRiseUs">
+            <summary>
+            Gets the pulse width rise to rise time.
+            </summary>
+            <returns>The pulse width time in microseconds.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.IsSensorPresent(CTRE.CANTalon.FeedbackDevice)">
+            <summary>
+            Gets whether the sensor is present.
+            </summary>
+            <param name="feedbackDevice">The sensor to check for.</param>
+            <returns>The status of the feedback device.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetNumberOfQuadIdxRises">
+            <summary>
+            Gets the number of quadrature index rises
+            </summary>
+            <returns>The number of rises on the index pin.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPinStateQuadA">
+            <summary>
+            Gets the state of the quadrature A pin.
+            </summary>
+            <returns>The state of the A pin</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPinStateQuadB">
+            <summary>
+            Gets the state of the quadrature B pin.
+            </summary>
+            <returns>The state of the B pin</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPinStateQuadIdx">
+            <summary>
+            Gets the state of the quadrature index pin.
+            </summary>
+            <returns>The state of the index pin</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.SetAnalogPosition(System.Int32)">
+            <summary>
+            Resets the analog position to a new position.
+            </summary>
+            <param name="newPosition">The new position to reset to.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.GetAnalogInPosition">
+            <summary>
+            Gets the analog input position, regardless of whether it is in the current feedback device.
+            </summary>
+            <returns>The 24 bit analog position. The bottom 10 bits are the ADC value, 
+            the upper 14 bits track the overflows and underflows.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetAnalogInRaw">
+            <summary>
+            Gets the analog input raw position, regardless of whether it is in the current feedback device.
+            </summary>
+            <returns>The ADC (0-1023) value on the analog pin.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetAnalogInVelocity">
+            <summary>
+            Gets the analog input velocity, regardless of whether it is in the current feedback device.
+            </summary>
+            <returns>The analog input velocity.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.GetClosedLoopError">
+            <summary>
+            Gets the current difference between the setpoint and the sensor value.
+            </summary>
+            <returns>The error in the PID Controller.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.SetAllowableClosedLoopErr(System.Int32)">
+            <summary>
+            Sets the max allowable closed loop error.
+            </summary>
+            <param name="allowableCloseLoopError">The max allowable close looped error for the selected profile.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.IsForwardLimitSwitchClosed">
+            <summary>
+            Gets the value of the forward limit switch.
+            </summary>
+            <returns>True if the limit switch is closed, otherwise false.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.IsReverseLimitSwitchClosed">
+            <summary>
+            Gets the value of the reverse limit switch.
+            </summary>
+            <returns>True if the limit switch is closed, otherwise false.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.IsBrakeEnabledDuringNeutral">
+            <summary>
+            Returns whether the brake is enabled during neutral.
+            </summary>
+            <returns>True if brake mode, false if coast mode.</returns>
+        </member>
+        <member name="P:CTRE.CANTalon.EncoderCodesPerRev">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.PotentiometerTurns">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetTemperature">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetOutputCurrent">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetOutputVoltage">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetBusVoltage">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetPosition">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.SetPosition(System.Double)">
+            <summary>
+            Sets the position of the encoder or potentiometer
+            </summary>
+            <param name="pos">The new position of the sensor providing feedback.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.GetSpeed">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetForwardLimitOk">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetReverseLimitOk">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetFaults">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.MotorControlMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.FeedBackDevice">
+            <summary>
+            Gets or sets the feedback device to be used by the talon.
+            </summary>
+            <remarks>
+            TODO: SOLVE THIS
+            </remarks>
+        </member>
+        <member name="M:CTRE.CANTalon.Enable">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.ControlEnabled">
+            <summary>
+            Gets or Sets whether closed loop control is enabled on the talon.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.P">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.I">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.D">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.F">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.IZone">
+            <summary>
+            Gets or sets the IZone of the CANTalon.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.GetIaccum">
+            <summary>
+            Gets the integral accumulator value.
+            </summary>
+            <returns>The value of the accumulated PID integral.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.ClearIAccum">
+            <summary>
+            Clears the integral accumulator value.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.CloseLoopRampRate">
+            <summary>
+            Gets or sets the closed loop ramp rate for the current profile. In Volts/Sec
+            </summary>
+            <remarks>
+            Limits the rate at which the throttle will change. Only affects position and speed closed loop modes.
+            </remarks>
+            <seealso cref="P:CTRE.CANTalon.Profile">See Profile for selecting a specific profile.</seealso>
+        </member>
+        <member name="M:CTRE.CANTalon.SetPID(System.Double,System.Double,System.Double,System.Double,System.Int32,System.Double,System.Int32)">
+            <summary>
+            Sets the PID and extra constants of the controler.
+            </summary>
+            <param name="p"></param>
+            <param name="i"></param>
+            <param name="d"></param>
+            <param name="f"></param>
+            <param name="izone"></param>
+            <param name="closeLoopRampRate"></param>
+            <param name="profile"></param>
+        </member>
+        <member name="M:CTRE.CANTalon.SetPID(System.Double,System.Double,System.Double)">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.Setpoint">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.Profile">
+            <summary>
+            Gets or sets which closed loop profile to use.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.VoltageCompensationRampRate">
+            <summary>
+            Gets or Sets the voltage compensation ramp rate.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.NeutralMode">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.ConfigSoftPositionLimits(System.Double,System.Double)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.DisableSoftPositionLimits">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.LimitMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.ForwardLimit">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.ReverseLimit">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.MaxOutputVoltage">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.VoltageRampRate">
+            <summary>
+            Sets the maximum voltage change rate in Volts/s.
+            </summary>
+            <remarks>
+            When in <see cref="F:WPILib.Interfaces.ControlMode.PercentVbus"/> or <see cref="F:WPILib.Interfaces.ControlMode.Voltage"/> output mode,
+            the rate at which the voltage changes can be limited to reduce current spike. Set this to 0.0
+            to disable rate limiting.
+            </remarks>
+        </member>
+        <member name="P:CTRE.CANTalon.FirmwareVersion">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.DeviceId">
+            <summary>
+            Gets the current DeviceId of the CANTalon
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.ForwardSoftLimit">
+            <summary>
+            Gets or Sets the Forward Soft limit of the CAN Talon
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.ForwardSoftLimitEnabled">
+            <summary>
+            Gets or sets whether the forward soft limit is enabled or not.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.ReverseSoftLimit">
+            <summary>
+            Gets or Sets the Reverse Soft limit of the CAN Talon
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.ReverseSoftLimitEnabled">
+            <summary>
+            Gets or sets whether the reverse soft limit is enabled or not.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.ClearStickyFaults">
+            <summary>
+            Clears all of the sticky faults for this CAN Talon.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.EnableLimitSwitches(System.Boolean,System.Boolean)">
+            <summary>
+            Sets the enabled state of both the forward and reverse soft limit.
+            </summary>
+            <param name="forward">True if the forward limit switch is enabled.</param>
+            <param name="reverse">True if the reverse limit switch is enabled.</param>
+        </member>
+        <member name="P:CTRE.CANTalon.ForwardLimitSwitchNormallyOpen">
+            <summary>
+            Gets or Sets whether the forward limit switch is normally open.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.ReverseLimitSwitchNormallyOpen">
+            <summary>
+            Gets or sets whether the reverse limit switch is normally open.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.ConfigPeakOutputVoltage(System.Double,System.Double)">
+            <summary>
+            Configures the output voltage peaks of the Talon.
+            </summary>
+            <param name="forwardVoltage">The maximum forward voltage to output.</param>
+            <param name="reverseVoltage">The maximum reverse voltage to output.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.ConfigNominalOutputVoltage(System.Double,System.Double)">
+            <summary>
+            Configures the nominal output voltage of the Talon.
+            </summary>
+            <param name="forwardVoltage">The nominal forward voltage.</param>
+            <param name="reverseVoltage">The nominal reverse voltage.</param>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultOverTemp">
+            <summary>
+            Gets if there is currently an Over Temperature fault. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultUnderVoltage">
+            <summary>
+            Gets if there is currently an UnderVoltage fault. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultForwardLimit">
+            <summary>
+            Gets if there is currently a fault on the Forward Limit. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultReverseLimit">
+            <summary>
+            Gets if there is currently a fault on the Reverse Limit. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultHardwareFailure">
+            <summary>
+            Gets if there is currently a  general hardware failure fault. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultForwardSoftLimit">
+            <summary>
+            Gets if there is currently a fault on the Forward Soft Limit. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.FaultReverseSoftLimit">
+            <summary>
+            Gets if there is currently a fault on the Reverse Soft Limit. (Non-Sticky)
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.StickyFaultOverTemp">
+            <summary>
+            Gets the number of over temperature sticky faults.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.StickyFaultUnderVoltage">
+            <summary>
+            Gets the number of under voltage sticky faults.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.StickyFaultForwardLimit">
+            <summary>
+            Gets the number of forward limit sticky faults.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.StickyFaultReverseLimit">
+            <summary>
+            Gets the number of reverse limit sticky faults.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.StickyFaultForwardSoftLimit">
+            <summary>
+            Gets the number of forward soft limit sticky faults.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.StickyFaultReverseSoftLimit">
+            <summary>
+            Gets the number of reverse soft limit sticky faults.
+            </summary>
+        </member>
+        <member name="P:CTRE.CANTalon.Expiration">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.Alive">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.StopMotor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.SafetyEnabled">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.Description">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.PidWrite(System.Double)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.PidGet">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.PIDSourceType">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.Set(System.Double)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.Get">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.Set(System.Double,System.Byte)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.EnableZeroSensorPositionOnIndex(System.Boolean,System.Boolean)">
+            <summary>
+            Enables Talon SRX to automatically zero the Sensor Position whenever an edge is detected
+            on the index signal.
+            </summary>
+            <param name="enable">Enable or Disable the feature.</param>
+            <param name="risingEdge">True to clear on rising edge, false for walling edge.</param>
+        </member>
+        <member name="M:CTRE.CANTalon.ChangeMotionControlFramePeriod(System.Int32)">
+            <summary>
+            Sets the period for motion control frames to be sent at.
+            </summary>
+            <param name="periodMs">The motion control frame period in seconds</param>
+        </member>
+        <member name="M:CTRE.CANTalon.ClearMotionProfileTrajectories">
+            <summary>
+            Clears the Motion Profile Trajectories on this Talon SRX.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.GetMotionProfileTopLevelBufferCount">
+            <summary>
+            Gets the Top Level Buffer Count of the Motion Profile.
+            </summary>
+            <returns>The number of Items in the top level buffer.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.PushMotionProfileTrajectory(CTRE.CANTalon.TrajectoryPoint)">
+            <summary>
+            Pushes a new <see cref="T:CTRE.CANTalon.TrajectoryPoint"/> to the Talon for Motion Profiling.
+            </summary>
+            <param name="trajPt">The TrajectoryPoint to send.</param>
+            <returns>True if successful, otherwise false.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.IsMotionProfileTopLevelBufferFull">
+            <summary>
+            Gets if the top level buffer for motion profiling is full.
+            </summary>
+            <returns>True if the top level buffer is full.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.ProcessMotionProfileBuffer">
+            <summary>
+            Processes the Motion Profile Buffer.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.GetMotionProfileStatus">
+            <summary>
+            Gets the status of the currently running the motion profile.
+            </summary>
+            <returns>The status of the motion profile.</returns>
+        </member>
+        <member name="M:CTRE.CANTalon.ClearMotionProfileHasUnderrun">
+            <summary>
+            Clears the motion profile has underrun flag.
+            </summary>
+        </member>
+        <member name="M:CTRE.CANTalon.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.Enabled">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.GetError">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.SelectProfileSlot(System.Int32)">
+            <summary>
+            Selects the profile slot on the Talon. 
+            </summary>
+            <param name="slotIdx">The profile to set (0 or 1).</param>
+        </member>
+        <member name="M:CTRE.CANTalon.Disable">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.UpdateTable">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.StartLiveWindowMode">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.StopLiveWindowMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.SmartDashboardType">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.ValueChanged(NetworkTables.Tables.ITable,System.String,NetworkTables.Value,NetworkTables.NotifyFlags)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.CANTalon.InitTable(NetworkTables.Tables.ITable)">
+            <inheritdoc/>
+        </member>
+        <member name="P:CTRE.CANTalon.Table">
+            <inheritdoc/>
+        </member>
+        <member name="M:CTRE.HALCanTalonSRX.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+    </members>
+</doc>
