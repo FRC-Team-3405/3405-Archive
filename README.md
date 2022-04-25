@@ -56,7 +56,16 @@ The ALChemists, known previously as the Golden Eagle Bots, are a FIRST Robotics 
 - In 2022, Team 3405 played in the ***Utah Regional*** and finished with a final season record of **4-7-0**.
 - Robot Code for the 2022 season can be found in the **2022** folder above.
 
+### 2023 - Charged Up (Presented by Haas) ###
+- In 2023, Team 3405 will play in the ***Utah Regional***.
+- Robot Code for the 2023 season will be found in the **2023** folder above.
+
 ## Robot History ##
+### 2014 ###
+- Team 3405's 2014 bot was programmed in **Java**.
+
+### 2015 ###
+- Team 3405's 2015 bot was programmed in **C++**.
 ### 2017 - ShibeBot ###
 - Team 3405's 2017 bot was programmed in **C#**.
 
@@ -76,3 +85,5 @@ The ALChemists, known previously as the Golden Eagle Bots, are a FIRST Robotics 
 - Team 3405's 2022 bots were programmed in **Java**.
 - The main competition bot was **Andre the Giant**.
 - Two test bots were made out of recycled drivebases - **Bob** and the **DuckBot**.
+
+### 2023 - TBA ###
