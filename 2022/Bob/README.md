@@ -1,0 +1,2 @@
+# Bob
+Bob is a robot consisting of a recycled AndyMark drivebase and is used primarily for testing and demonstration purposes. His name comes from our team's alleged theme of "ducks and Bob Ross" because, well, why not? 
