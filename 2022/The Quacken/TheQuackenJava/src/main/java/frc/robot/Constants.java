@@ -23,8 +23,8 @@ public final class Constants {
 
     //** Pneumatics */
     // DoubleSolenoid
-    public static final int HIGHGEAR = 0;
-    public static final int LOWGEAR = 1;
+    public static final int HIGHGEAR = 4;
+    public static final int LOWGEAR = 5;
 
     //** OI */
     // Driver Controller
