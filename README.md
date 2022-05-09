@@ -81,9 +81,10 @@ The ALChemists, known previously as the Golden Eagle Bots, are a FIRST Robotics 
 ### 2021 - Bot Ross ###
 - Team 3405 reutilized their 2020 bot by programming it in **Java**.
 
-### 2022 - Andre the Giant, Bob, and the DuckBot ###
+### 2022 - Andre the Giant, Mak, Bob, and the DuckBot ###
 - Team 3405's 2022 bots were programmed in **Java**.
 - The main competition bot was **Andre the Giant**.
 - Two test bots were made out of recycled drivebases - **Bob** and the **DuckBot**.
+- One test mecanum bot was constructed for the first time - **Mak**.
 
 ### 2023 - TBA ###
