@@ -5,13 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+// import frc.robot.Constants; // Constants File
+import frc.robot.RobotContainer; // RobotContainer File
 
 public class arcadeDrive extends CommandBase {
-  /** Creates a new arcadeDrive. */
+  /** Creates a new ArcadeDrive. */
   public arcadeDrive() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_robotDrive);
+    addRequirements(RobotContainer.m_drive);
   }
 
   // Called when the command is initially scheduled.
@@ -21,15 +22,15 @@ public class arcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double moveSpeed = -RobotContainer.driveController.getRawAxis(1);
-    double rotateSpeed = -RobotContainer.driveController.getRawAxis(3);
-    RobotContainer.m_robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+    double moveSpeed = RobotContainer.xbox.getRawAxis(1); // Limit the moveSpeed to 80% Power
+    double rotateSpeed = RobotContainer.xbox.getRawAxis(0); // Limit the rotateSpeed to 80% Power
+    RobotContainer.m_drive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_robotDrive.arcadeDrive(0,0);
+    RobotContainer.m_drive.arcadeDrive(0,0); // Stops the motors when the robot is disabled or enters teleop mode AFTER auto
   }
 
   // Returns true when the command should end.

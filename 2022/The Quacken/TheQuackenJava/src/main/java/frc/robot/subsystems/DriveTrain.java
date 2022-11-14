@@ -34,6 +34,12 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(fwd, rot);
   }
 
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftMotors.setVoltage(leftVolts);
+    rightMotors.setVoltage(rightVolts);
+    m_drive.feed();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

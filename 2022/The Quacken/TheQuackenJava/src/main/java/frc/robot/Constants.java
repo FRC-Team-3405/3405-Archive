@@ -30,4 +30,14 @@ public final class Constants {
     // Driver Controller
     public static final int SHIFT_BUTTON = 6; // Right Bumper
 
+    //** LimeLight Camera */
+    public static final double KNOWN_DISTANCE = 3.048; // 10 Feet (120 inches in meters)
+    public static final int PIXEL_WIDTH_KNOWN = 60;
+    public static final double KNOWN_TAPE_BOUND_WIDTH = 0.3937; // Width of the tape (15.5 inches converted to meters)
+    public static final double FOCAL_LENGTH = (KNOWN_DISTANCE * PIXEL_WIDTH_KNOWN) / KNOWN_TAPE_BOUND_WIDTH; //** This is an equation of some kind pulled from this repo: https://github.com/Yeti-Robotics/Y3T1-java-2021/blob/master/src/main/java/frc/robot/RobotContainer.java */
+    public static final int WIDTH = 960;
+    public static final int HEIGHT = 720;
+    public static final double FOV_SUB_H = 59.6;
+    public static final double FOV_SUB_V = 45.7;
+
 }

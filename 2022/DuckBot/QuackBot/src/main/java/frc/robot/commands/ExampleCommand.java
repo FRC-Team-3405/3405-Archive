@@ -4,14 +4,23 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 
-public class arcadeDrive extends CommandBase {
-  /** Creates a new arcadeDrive. */
-  public arcadeDrive() {
+/** An example command that uses an example subsystem. */
+public class ExampleCommand extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final ExampleSubsystem m_subsystem;
+
+  /**
+   * Creates a new ExampleCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+  public ExampleCommand(ExampleSubsystem subsystem) {
+    m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_robotDrive);
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -20,17 +29,11 @@ public class arcadeDrive extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    double moveSpeed = -RobotContainer.driveController.getRawAxis(1);
-    double rotateSpeed = -RobotContainer.driveController.getRawAxis(3);
-    RobotContainer.m_robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    RobotContainer.m_robotDrive.arcadeDrive(0,0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
