@@ -12,7 +12,7 @@ public class arcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
   public arcadeDrive() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_drive);
+    addRequirements(RobotContainer.m_drive); // Add the RobotContainer's m_drive object as a requirement
   }
 
   // Called when the command is initially scheduled.
@@ -22,8 +22,8 @@ public class arcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double moveSpeed = RobotContainer.xbox.getRawAxis(1); // Limit the moveSpeed to 80% Power
-    double rotateSpeed = RobotContainer.xbox.getRawAxis(0); // Limit the rotateSpeed to 80% Power
+    double moveSpeed = RobotContainer.xbox.getRawAxis(1);
+    double rotateSpeed = RobotContainer.xbox.getRawAxis(0);
     RobotContainer.m_drive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 

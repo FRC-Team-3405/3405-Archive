@@ -11,8 +11,8 @@ import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class DriveTrain extends SubsystemBase {
-  public final WPI_TalonSRX m_leftmotor = new WPI_TalonSRX(Constants.MOTORLEFT);
-  public final WPI_TalonSRX m_rightmotor = new WPI_TalonSRX(Constants.MOTORIGHT);
+  public final WPI_TalonSRX m_leftmotor = new WPI_TalonSRX(Constants.M_LEFT);
+  public final WPI_TalonSRX m_rightmotor = new WPI_TalonSRX(Constants.M_RIGHT);
 
   private final DifferentialDrive drive = new DifferentialDrive(m_leftmotor, m_rightmotor);
   /** Creates a new DriveTrain. */

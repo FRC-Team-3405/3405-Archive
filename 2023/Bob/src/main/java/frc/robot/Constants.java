@@ -13,6 +13,23 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final int MOTORLEFT = 1;
-    public static final int MOTORIGHT = 2;
+    /**
+     * NOTE: Please use the following naming conventions when giving constant values a name:
+     * - Items that are motors: "M_NAME_HERE". The "M_" indicates a motor value.
+     * - Items that are part of the CAN Bus (that aren't motors): "C_NAME_HERE"
+     * - Items that are connected to the RoboRIO directly: "R_NAME_HERE"
+     * - Items that are connected to the Voltage Regulator Module: "V_NAME_HERE"
+     * - Items that are external hardware (Raspberry Pi, LimeLight, etc.): "E_NAME_HERE"
+     * Please list items in their respective categories in the order presented here (M, C, R, E).
+    */
+    // ROBOT //
+    // - DriveTrain - //
+    public static final int M_LEFT = 1; // Left Motor
+    public static final int M_RIGHT = 2; // Right Motor
+
+    // UI //
+    // - Main Controller - //
+    public static final int CONTROLLER = 0; // Primary Controller Port
+    public static final int REVENGINE = 1; // Button to Run the Motors indefinitely at 25% power
+
 }
