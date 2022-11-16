@@ -14,9 +14,9 @@ Fast, extremely lightweight, and light on material, Bob is the modernized demons
 - 1 **Ultrasonic Sensor**
 
 ## Seasons Used: ##
-- 2022 - First Season in use. Constructed out of a recycled AndyMark drivetrain, a piece of plywood, and a lot of zipties.
-- 2023 - Second Season in use. Bob was utilized to formalize our programming styling guides.
+- **2022** - First Season in use. Constructed out of a recycled AndyMark drivetrain, a piece of plywood, and a lot of zipties.
+- **2023** - Second Season in use. Bob was utilized to formalize our programming styling guides.
 
 ## Changelog ##
-- **2023.0.1 (Preseason Release)** - First software iteration to prepare for the 2023 FRC season. This release is merely the basic driving functions of the robot. (Released 14 November 2022)
-- **2023.0.2 (Preseason Release)** - Second software iteration to prepare for the 2023 FRC season. This release cleans up the Constants file, introducing a new Constants naming convention to better organize our constants file. This eliminates the need for multiple Constants files, thus streamlining our code even more. (Released 16 November 2022))
+- ***2023.0.1 (Preseason Release)*** - First software iteration to prepare for the 2023 FRC season. This release is merely the basic driving functions of the robot. *(Released 14 November 2022)*
+- ***2023.0.2 (Preseason Release)*** - Second software iteration to prepare for the 2023 FRC season. This release cleans up the Constants file, introducing a new Constants naming convention to better organize our constants file. This eliminates the need for multiple Constants files, thus streamlining our code even more. *(Released 16 November 2022))*
