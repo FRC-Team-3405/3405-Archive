@@ -1,4 +1,4 @@
-# Bob (ver. 2023.0.2) #
+# Bob (ver. 2023.0.3) #
 Fast, extremely lightweight, and light on material, Bob is the modernized demonstration and training robot for Team 3405. Utilizing components similar to potential new robots, Bob provides a training environment in which the programmer learns to program, the driver learns to drive, and the engineer learns to build and wire a basic robot.
 
 
