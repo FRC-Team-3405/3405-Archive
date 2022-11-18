@@ -30,6 +30,5 @@ public final class Constants {
     // UI //
     // - Main Controller - //
     public static final int CONTROLLER = 0; // Primary Controller Port
-    public static final int REVENGINE = 1; // Button to Run the Motors indefinitely at 25% power
 
 }
