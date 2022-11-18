@@ -28,4 +28,11 @@ public class DriveTrain extends SubsystemBase {
   public void arcadeDrive(double fwd, double rot) {
     drive.arcadeDrive(fwd, rot);
   }
+
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    m_leftmotor.setVoltage(leftVolts);
+    m_rightmotor.setVoltage(rightVolts);
+    m_leftmotor.feed();
+    m_rightmotor.feed();
+  }
 }

@@ -6,11 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.arcadeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.*;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,6 +27,8 @@ public class RobotContainer {
   // The robot's subsystems are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static DriveTrain m_drive = new DriveTrain(); // DriveTrain
+  // Autonomous Routine Chooser
+  private SendableChooser<Command> m_autoChoice;
 
   // The robot's commands are defined here...
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -35,6 +40,8 @@ public class RobotContainer {
 
     // Set default commands on subsystems
     m_drive.setDefaultCommand(new arcadeDrive());
+
+    buildDriverTab();
   }
 
   /**
@@ -45,6 +52,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {}
 
+  private void buildDriverTab(){
+    ShuffleboardTab driveTab = Shuffleboard.getTab("Drive");
+    m_autoChoice = new SendableChooser<Command>();
+    m_autoChoice.addOption("Forward", new DriveForward());
+    m_autoChoice.addOption("Backward", new DriveBackward());
+    m_autoChoice.addOption("Both", new DFARSHAR());
+    m_autoChoice.addOption("Self Destruct", new SelfDestruct());
+    m_autoChoice.setDefaultOption("Both", new DFARSHAR());
+    driveTab.add("Autonomous Chooser", m_autoChoice).withWidget(BuiltInWidgets.kComboBoxChooser).withPosition(0, 0).withSize(2, 1);
+  
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -52,6 +71,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_autoChoice.getSelected();
   }
 }
