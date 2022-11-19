@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -25,13 +24,11 @@ public class RobotContainer {
   // User Controllers are defined here...
   public static XboxController xbox = new XboxController(Constants.CONTROLLER); // Xbox Controller (Or Joystick)
   // The robot's subsystems are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static DriveTrain m_drive = new DriveTrain(); // DriveTrain
   // Autonomous Routine Chooser
-  private SendableChooser<Command> m_autoChoice;
+  private static SendableChooser<Command> m_autoChoice;
 
   // The robot's commands are defined here...
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -41,7 +38,7 @@ public class RobotContainer {
     // Set default commands on subsystems
     m_drive.setDefaultCommand(new arcadeDrive());
 
-    buildDriverTab();
+    // buildDriverTab();
   }
 
   /**
@@ -52,14 +49,14 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {}
 
-  private void buildDriverTab(){
+  public static void buildDriverTab(){
     ShuffleboardTab driveTab = Shuffleboard.getTab("Drive");
     m_autoChoice = new SendableChooser<Command>();
-    m_autoChoice.addOption("Forward", new DriveForward());
-    m_autoChoice.addOption("Backward", new DriveBackward());
-    m_autoChoice.addOption("Both", new DFARSHAR());
-    m_autoChoice.addOption("Self Destruct", new SelfDestruct());
-    m_autoChoice.setDefaultOption("Both", new DFARSHAR());
+    m_autoChoice.addOption("Forward", new DriveForward()); // Drive forward for 1 second
+    m_autoChoice.addOption("Backward", new DriveBackward()); // Drive backward for 1 second
+    m_autoChoice.addOption("Both", new DFARSHAR()); // Do DriveForward, then DriveBackward
+    m_autoChoice.addOption("Self Destruct", new SelfDestruct()); // Spin really really fast (see: Anakin Skywalker)
+    m_autoChoice.setDefaultOption("Self Destruct", new SelfDestruct()); // Default
     driveTab.add("Autonomous Chooser", m_autoChoice).withWidget(BuiltInWidgets.kComboBoxChooser).withPosition(0, 0).withSize(2, 1);
   
   }

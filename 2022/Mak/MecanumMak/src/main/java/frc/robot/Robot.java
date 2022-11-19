@@ -4,11 +4,13 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+// import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX; // TEST
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+// import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** This is a demo program showing how to use Mecanum control with the MecanumDrive class. */
@@ -25,10 +27,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    WPI_VictorSPX frontLeft = new WPI_VictorSPX(kFrontLeftChannel);
-    WPI_VictorSPX rearLeft = new WPI_VictorSPX(kRearLeftChannel);
-    WPI_VictorSPX frontRight = new WPI_VictorSPX(kFrontRightChannel);
-    WPI_VictorSPX rearRight = new WPI_VictorSPX(kRearRightChannel);
+    Talon frontLeft = new Talon(kFrontLeftChannel);
+    Talon rearLeft = new Talon(kRearLeftChannel);
+    Talon frontRight = new Talon(kFrontRightChannel);
+    Talon rearRight = new Talon(kRearRightChannel);
 
     // Invert the right side motors.
     // You may need to change or remove this to match your robot.

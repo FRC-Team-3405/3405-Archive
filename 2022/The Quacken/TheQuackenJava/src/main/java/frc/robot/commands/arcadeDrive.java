@@ -22,7 +22,7 @@ public class arcadeDrive extends CommandBase {
   @Override
   public void execute() {
     double moveSpeed = -RobotContainer.driveController.getRawAxis(1);
-    double rotateSpeed = -RobotContainer.driveController.getRawAxis(3);
+    double rotateSpeed = -RobotContainer.driveController.getRawAxis(0);
     RobotContainer.m_robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
