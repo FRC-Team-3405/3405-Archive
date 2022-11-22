@@ -1,4 +1,4 @@
-# Bob (ver. 2023.0.2) #
+# Bob (ver. 2023.0.3) #
 Fast, extremely lightweight, and light on material, Bob is the modernized demonstration and training robot for Team 3405. Utilizing components similar to potential new robots, Bob provides a training environment in which the programmer learns to program, the driver learns to drive, and the engineer learns to build and wire a basic robot.
 
 
@@ -20,4 +20,8 @@ Fast, extremely lightweight, and light on material, Bob is the modernized demons
 ## Changelog: ##
 - ***2023.0.1 (Preseason Release)*** - First software iteration to prepare for the 2023 FRC season. This release is merely the basic driving functions of the robot. *(Released 14 November 2022)*
 - ***2023.0.2 (Preseason Release)*** - Second software iteration to prepare for the 2023 FRC season. This release cleans up the Constants file, introducing a new Constants naming convention to better organize our constants file. This eliminates the need for multiple Constants files, thus streamlining our code even more. *(Released 16 November 2022)*
+<<<<<<< HEAD
 - ***2023.0.3 (Preseason Release)*** - Third software iteration to prepare for the 2023 FRC season. This release adds autonomous routines (Drive Forward, Drive Backward, and Spin) and Sequential Commands (DFARSHAR, SelfDestruct). The robot program automatically builds a ShuffleBoard tab with the autonomous selector. *(Released 18 November 2022)*
+=======
+- ***2023.0.3 (Preseason Release)*** - Third software iteration to prepare for the 2023 FRC season. This release adds autonomous routines (Drive Forward, Drive Backward, and Spin) and Sequential Commands (DFARSHAR, SelfDestruct). The robot program automatically builds a ShuffleBoard tab with the autonomous selectpr. *(Released 18 November 2022)*
+>>>>>>> b13bb5fe6af69a1fd59abee9f79d80674d8d1d93
