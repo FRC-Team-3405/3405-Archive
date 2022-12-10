@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** This is a demo program showing how to use Mecanum control with the MecanumDrive class. */
 public class Robot extends TimedRobot {
-  private static final int kFrontLeftChannel = 1;
-  private static final int kRearLeftChannel = 2;
-  private static final int kFrontRightChannel = 3;
-  private static final int kRearRightChannel = 0;
+  private static final int kFrontLeftChannel = 3;
+  private static final int kRearLeftChannel = 0;
+  private static final int kFrontRightChannel = 1;
+  private static final int kRearRightChannel = 2;
 
   private static final int kJoystickChannel = 0;
 
@@ -47,10 +47,10 @@ public class Robot extends TimedRobot {
     // Use the joystick X axis for lateral movement, Y axis for forward
     // movement, and Z axis for rotation.
     //m_robotDrive.driveCartesian(POVrawValues()[0], POVrawValues()[1], m_stick.getRawAxis(4),0.0);
-    m_robotDrive.driveCartesian(-m_stick.getRawAxis(1), m_stick.getRawAxis(0), m_stick.getRawAxis(4), 0.0);
-    SmartDashboard.putNumber("POVY", m_stick.getPOV());
-    SmartDashboard.putNumber("FwdBack", -m_stick.getRawAxis(1));
-    SmartDashboard.putNumber("LeftRight", -m_stick.getRawAxis(0));
+    m_robotDrive.drivePolar(-m_stick.getRawAxis(1), m_stick.getRawAxis(0), m_stick.getRawAxis(3)); // AIRFLO Configuration
+    // SmartDashboard.putNumber("POVY", m_stick.getPOV());
+    // SmartDashboard.putNumber("FwdBack", -m_stick.getRawAxis(1));
+    // SmartDashboard.putNumber("LeftRight", -m_stick.getRawAxis(0));
     //m_robotDrive.driveCartesian(-m_stick.getPOV(1), m_stick.getPOV(0), m_stick.getRawAxis(4), 0.0);
   }
   public double[] POVrawValues(){
