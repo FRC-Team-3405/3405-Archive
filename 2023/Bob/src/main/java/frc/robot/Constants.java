@@ -30,5 +30,11 @@ public final class Constants {
     // UI //
     // - Main Controller - //
     public static final int CONTROLLER = 0; // Primary Controller Port
+    // Note: AIRFLO Controller X(1), Y(3)
+    // Note: Xbox Controller X(1), Y(3)
+    // Note: Joystick X(1), Y(4)
+    public static final int X_AXIS = 1; // X-Axis Channel (Controller)
+    public static final int Y_AXIS = 3; // Y-Axis Channel (Controller)
+    public static final int Z_AXIS = 4; // Z-Axis Channel (Controller)
 
 }
