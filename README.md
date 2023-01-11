@@ -87,6 +87,7 @@ The ALChemists, known previously as the Golden Eagle Bots, are a FIRST Robotics 
 - Two test bots were made out of recycled drivebases - **Bob** and the **DuckBot**.
 - One test mecanum bot was constructed for the first time - **Mak**.
 
-### 2023 - TBA, Andre the Giant, Bob ###
+### 2023 - TBA, Andre the Giant, Bob, Mak ###
 - **Bob** was repurposed from the 2022 season and programmed in **Java**.
 - **Andre the Giant** was used for recruiting purposes.
+- **Mak** was repurposed from the 2022 season and programmed in **Java**.
