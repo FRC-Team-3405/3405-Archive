@@ -7,7 +7,11 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final DriveTrain m_drivetrain = new DriveTrain();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -30,6 +35,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    buildDriverTab();
   }
 
   /**
@@ -59,5 +65,16 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return Autos.exampleAuto(m_exampleSubsystem);
+  }
+
+  private void buildDriverTab() {
+    /* Build Driver Dashboard */
+    ShuffleboardTab driveDash = Shuffleboard.getTab("DriveDash");
+    /* driveDash Components */
+    // DriveTrain Components
+    driveDash.add("Comp Enable", m_drivetrain.getCompressorVal()).withPosition(0,0).withWidget(BuiltInWidgets.kBooleanBox);
+    driveDash.add("Comp Volts", m_drivetrain.getCompressorVolts()).withPosition(0,1).withWidget(BuiltInWidgets.kBooleanBox);
+    driveDash.add("YAW", m_drivetrain.getYaw()).withPosition(1,0).withWidget(BuiltInWidgets.kGyro);
+    driveDash.add("PITCH", m_drivetrain.getPitch()).withPosition(3,0).withWidget(BuiltInWidgets.kGyro);
   }
 }

@@ -11,15 +11,18 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX; // Import TalonFX Library
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration; // Stator Current Limit
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration; // Supply Current Limit
 import com.ctre.phoenix.sensors.WPI_Pigeon2; // Import Pigeon 2.0 Library
-import edu.wpi.first.wpilibj.DoubleSolenoid; // Shifter Solenoid
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class DriveTrain extends SubsystemBase {
   /* Pneumatics */
-  public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.HIGHPORT, Constants.LOWPORT); // Shifter Solenoid
+  Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
+  DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.HIGHPORT, Constants.LOWPORT); // Shifter Solenoid
   public static boolean LowGear = false;
   /* Motors */
   private final WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.FL_TALONFX); // Front Left TalonFX
@@ -59,6 +62,21 @@ public class DriveTrain extends SubsystemBase {
   public void shift() {
     m_shift.toggle();
     LowGear = !LowGear;
+  }
+
+  public boolean getCompressorVal() {
+    return phCompressor.getPressureSwitchValue();
+  }
+  public double getCompressorVolts() {
+    return phCompressor.getCurrent();
+  }
+  // Get Yaw from Pigeon2
+  public double getYaw() {
+    return m_pigeon.getYaw();
+  }
+  // Get Pitch from Pigeon2
+  public double getPitch() {
+    return m_pigeon.getPitch();
   }
 
   @Override
