@@ -5,8 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -27,6 +26,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final static DriveTrain m_drivetrain = new DriveTrain();
+  // Auto Routine Chooser
+  private static SendableChooser<Command> m_autoChoice;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static CommandXboxController xbox =
@@ -36,7 +37,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    buildDriverTab();
+    // Set default commands on subsystems
+    m_drivetrain.setDefaultCommand(new ArcadeDrive());
   }
 
   /**
@@ -49,13 +51,29 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // Schedule `DriveForward` when `exampleCondition` changes to `true`
+    new Trigger(m_exampleSubsystem::exampleCondition).onTrue(new DriveForward());
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     xbox.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+  }
+
+  /* METHOD FOR BUILDING THE DRIVER DASHBOARD DURING ROBOT BOOT-UP */
+  public void buildDriverTab() {
+    /* Build Driver Dashboard */
+    ShuffleboardTab driveDash = Shuffleboard.getTab("DriveDash");
+    m_autoChoice = new SendableChooser<Command>();
+    m_autoChoice.setDefaultOption("Default Auto", new DriveForward()); // DEFAULT AUTO
+    m_autoChoice.addOption("Drive Forward", new DriveForward()); // DRIVE FORWARD AUTO
+    m_autoChoice.addOption("Drive Backward", new DriveBackward()); // DRIVE BACKWARD AUTO
+    driveDash.add("Auto Selector", m_autoChoice).withPosition(0,2).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2,1);
+    /* driveDash Components */
+    // DriveTrain Components
+    driveDash.add("Comp Enable", m_drivetrain.getCompressorVal()).withPosition(0,0).withWidget(BuiltInWidgets.kBooleanBox);
+    driveDash.add("Comp Volts", m_drivetrain.getCompressorVolts()).withPosition(0,1).withWidget(BuiltInWidgets.kBooleanBox);
+    driveDash.add("YAW", m_drivetrain.getYaw()).withPosition(1,0).withWidget(BuiltInWidgets.kGyro);
+    driveDash.add("PITCH", m_drivetrain.getPitch()).withPosition(3,0).withWidget(BuiltInWidgets.kGyro);
   }
 
   /**
@@ -64,24 +82,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
-
-  private void buildDriverTab() {
-    /* Build Driver Dashboard */
-    ShuffleboardTab driveDash = Shuffleboard.getTab("DriveDash");
-    /* driveDash Components */
-    // DriveTrain Components
-    driveDash.add("Comp Enable", m_drivetrain.getCompressorVal()).withPosition(0,0).withWidget(BuiltInWidgets.kBooleanBox);
-    driveDash.add("Comp Volts", m_drivetrain.getCompressorVolts()).withPosition(0,1).withWidget(BuiltInWidgets.kBooleanBox);
-    driveDash.add("YAW", m_drivetrain.getYaw()).withPosition(1,0).withWidget(BuiltInWidgets.kGyro);
-    driveDash.add("PITCH", m_drivetrain.getPitch()).withPosition(3,0).withWidget(BuiltInWidgets.kGyro);
-    // Auto Routine Selector
-    SendableChooser<Command> m_autoChoice = new SendableChooser<Command>();
-    m_autoChoice.setDefaultOption("Default Auto", Autos.exampleAuto(m_exampleSubsystem)); // DEFAULT AUTO
-    m_autoChoice.addOption("Example Auto", Autos.exampleAuto(m_exampleSubsystem)); // EXAMPLE AUTO
-    driveDash.add("Auto Selector", m_autoChoice).withPosition(0,2).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2,1);
-    
+    return m_autoChoice.getSelected();
   }
 }
