@@ -26,7 +26,7 @@ public class RobotContainer {
   // The robot's subsystems are defined here...
   public static DriveTrain m_drive = new DriveTrain(); // DriveTrain
   // Autonomous Routine Chooser
-  private static SendableChooser<Command> m_autoChoice;
+  private static SendableChooser<Command> m_autoChoice; // Autonomous Chooser
 
   // The robot's commands are defined here...
   
