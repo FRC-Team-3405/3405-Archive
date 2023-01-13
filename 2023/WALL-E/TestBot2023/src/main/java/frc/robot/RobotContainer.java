@@ -63,13 +63,13 @@ public class RobotContainer {
   public void buildDriverTab() {
     /* Build Driver Dashboard */
     ShuffleboardTab driveDash = Shuffleboard.getTab("DriveDash");
+    /* Auto Routine Chooser */
     m_autoChoice = new SendableChooser<Command>();
     m_autoChoice.setDefaultOption("Default Auto", new DriveForward()); // DEFAULT AUTO
     m_autoChoice.addOption("Drive Forward", new DriveForward()); // DRIVE FORWARD AUTO
     m_autoChoice.addOption("Drive Backward", new DriveBackward()); // DRIVE BACKWARD AUTO
     driveDash.add("Auto Selector", m_autoChoice).withPosition(0,2).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2,1);
-    /* driveDash Components */
-    // DriveTrain Components
+    /* DriveTrain Info Displays */
     driveDash.add("Comp Enable", m_drivetrain.getCompressorVal()).withPosition(0,0).withWidget(BuiltInWidgets.kBooleanBox);
     driveDash.add("Comp Volts", m_drivetrain.getCompressorVolts()).withPosition(0,1).withWidget(BuiltInWidgets.kBooleanBox);
     driveDash.add("YAW", m_drivetrain.getYaw()).withPosition(1,0).withWidget(BuiltInWidgets.kGyro);
