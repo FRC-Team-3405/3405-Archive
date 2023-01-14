@@ -5,8 +5,8 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+// import edu.wpi.first.math.geometry.Rotation2d;
+// import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -76,7 +76,7 @@ public class DriveTrain extends SubsystemBase {
   private final Gyro m_gyro = new ADXRS450_Gyro();
 
   // Odometry class for tracking robot pose
-  private final DifferentialDriveOdometry m_odometry;
+  // private final DifferentialDriveOdometry m_odometry;
 
   void setFalconLimit(WPI_TalonFX talon) {
     talon.configSupplyCurrentLimit(
@@ -106,7 +106,7 @@ public class DriveTrain extends SubsystemBase {
     m_rightEncoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
 
     resetEncoders();
-    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
+    // m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
   }
   
   // Shift to High Gear, Update the SmartDashboard to show we are in HIGH gear
@@ -135,14 +135,14 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // Update the odometry in the periodic block
-    m_odometry.update(
+    // m_odometry.update(
         //m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance()); // Multiply these values by the DISTANCE_PER_PULSE constant?
-        m_gyro.getRotation2d(), m_leftEncoder.getDistance()*Constants.DISTANCE_PER_PULSE, m_rightEncoder.getDistance()*Constants.DISTANCE_PER_PULSE); // Testing stuff    edit: IT WORKS DO NOT DELETE
-    m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+        // m_gyro.getRotation2d(), m_leftEncoder.getDistance()*Constants.DISTANCE_PER_PULSE, m_rightEncoder.getDistance()*Constants.DISTANCE_PER_PULSE); // Testing stuff    edit: IT WORKS DO NOT DELETE
+    // m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
 
-    var translation = m_odometry.getPoseMeters().getTranslation();
-    m_xEntry.setNumber(translation.getX());
-    m_yEntry.setNumber(translation.getY());
+    // var translation = m_odometry.getPoseMeters().getTranslation();
+    // m_xEntry.setNumber(translation.getX());
+    // m_yEntry.setNumber(translation.getY());
   }
 
   /**
@@ -150,9 +150,10 @@ public class DriveTrain extends SubsystemBase {
    *
    * @return The pose.
    */
-  public Pose2d getPose() {
-    return m_odometry.getPoseMeters();
-  }
+  // public Pose2d getPose() {
+  //   // return m_odometry.getPoseMeters();
+  //   pass
+  // }
 
   /**
    * Returns the current wheel speeds of the robot.
@@ -170,7 +171,7 @@ public class DriveTrain extends SubsystemBase {
    */
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
-    m_odometry.resetPosition(pose, m_gyro.getRotation2d());
+    // m_odometry.resetPosition(pose, m_gyro.getRotation2d());
   }
 
   /**

@@ -43,22 +43,22 @@ public class BlueTwoBall_One extends CommandBase {
       DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
     }
 
-    ramsete =
-        new RamseteCommand(
-            Trajectory, // To use the example trajectory just replace this with exampleTrajectory.
-            RobotContainer.m_robotDrive::getPose,
-            new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
-            new SimpleMotorFeedforward(
-                DriveConstants.ksVolts,
-                DriveConstants.kvVoltSecondsPerMeter,
-                DriveConstants.kaVoltSecondsSquaredPerMeter),
-            DriveConstants.kDriveKinematics,
-            RobotContainer.m_robotDrive::getWheelSpeeds,
-            new PIDController(DriveConstants.kPDriveVel, 0.4, 0.05),
-            new PIDController(DriveConstants.kPDriveVel, 0.4, 0.05),
-            // RamseteCommand passes volts to the callback
-            RobotContainer.m_robotDrive::tankDriveVolts,
-            RobotContainer.m_robotDrive);
+    // ramsete =
+    //     new RamseteCommand(
+    //         Trajectory, // To use the example trajectory just replace this with exampleTrajectory.
+    //         RobotContainer.m_robotDrive::getPose,
+    //         new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
+    //         new SimpleMotorFeedforward(
+    //             DriveConstants.ksVolts,
+    //             DriveConstants.kvVoltSecondsPerMeter,
+    //             DriveConstants.kaVoltSecondsSquaredPerMeter),
+    //         DriveConstants.kDriveKinematics,
+    //         RobotContainer.m_robotDrive::getWheelSpeeds,
+    //         new PIDController(DriveConstants.kPDriveVel, 0.4, 0.05),
+    //         new PIDController(DriveConstants.kPDriveVel, 0.4, 0.05),
+    //         // RamseteCommand passes volts to the callback
+    //         RobotContainer.m_robotDrive::tankDriveVolts,
+    //         RobotContainer.m_robotDrive);
 
     // Reset odometry to the starting pose of the trajectory.
     RobotContainer.m_robotDrive.resetOdometry(Trajectory.getInitialPose());

@@ -99,8 +99,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Primary Driver
-    alignButton.whenPressed(new AlignRobot());
-    shiftButton.whenPressed(new ShiftGears());
+    alignButton.onTrue(new AlignRobot());
+    shiftButton.onTrue(new ShiftGears());
     
     // shiftHighButton.whenPressed(new ShiftHigh());
     //shiftHighButton.whenPressed(new FunctionalCommand(() -> System.out.println("I'm running!"), ()->{}, ()->{}, alignButton, ()->{}));
@@ -109,7 +109,7 @@ public class RobotContainer {
     
     // Secondary Driver
     //System.out.println("Ran configureButtonBindings");
-    btn_intake_arm.whenPressed(new Extend());
+    btn_intake_arm.onTrue(new Extend());
     // intakeButton.whenPressed(new doIntake());
     // climbButton2.whenPressed(new Climb());
     // climbButton.whenPressed(new InstantCommand(() -> { m_climber.extendTime = true; }, m_climber));
