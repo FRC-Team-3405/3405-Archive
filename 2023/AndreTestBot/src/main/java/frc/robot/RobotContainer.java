@@ -5,7 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-// import frc.robot.commands.*;
+import frc.robot.commands.*;
 import frc.robot.commands.testAutoRoutines.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -26,6 +26,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static Drivetrain m_drive = new Drivetrain(); // Drivetrain
   public static Intake m_intake = new Intake(); // Intake
+  public static Shooter m_shooter = new Shooter(); // Shooter
   // public static Shooter m_shooter = new Shooter(); // Shooter
   private static SendableChooser<Command> m_autoChoice; // Auto Routine Chooser
 
@@ -51,6 +52,7 @@ public class RobotContainer {
     xbox.rightBumper().onTrue(m_drive.ShiftGears()); // Shift Gears
     xbox.b().onTrue(m_intake.ToggleIntake()); // Extend/Retract Intake
     xbox.a().onTrue(new DriveForward()); // Drive Forward for 1.5 seconds on button press TEST TEST TEST
+    xbox.rightTrigger().onTrue(new AutoShoot()); // Shoot on Right Trigger press
   }
 
   /* METHOD FOR BUILDING THE DRIVER DASHBOARD DURING BOOT-UP */

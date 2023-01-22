@@ -31,6 +31,12 @@ public final class Constants {
   public static final int INTAKE_IN = 6;
   public static final int INTAKE_OUT = 7;
 
+  /** Shooter Constants */
+  public static final int RS_TALONFX = 20; // Right Shooter TalonFX
+  public static final int LS_TALONFX = 21; // Left Shooter TalonFX
+  public static final int LTM_TALONSRX = 5; // Lower Tower Motor TalonSRX
+  public static final int UTM_TALONSRX = 6; // Upper Tower Motor TalonSRX
+  public static final int STM_VICTORSPX = 7; // Intake VictorSPX
   /** Operator Constants */
   public static class OperatorConstants {
     public static final int P_XBOX = 0; // Controller Port
