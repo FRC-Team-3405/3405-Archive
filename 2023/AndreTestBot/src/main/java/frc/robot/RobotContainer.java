@@ -53,6 +53,7 @@ public class RobotContainer {
     xbox.b().onTrue(m_intake.ToggleIntake()); // Extend/Retract Intake
     xbox.a().onTrue(new DriveForward()); // Drive Forward for 1.5 seconds on button press TEST TEST TEST
     xbox.rightTrigger().onTrue(new AutoShoot()); // Shoot on Right Trigger press
+    xbox.leftTrigger().onTrue(new AutoAlign()); // Auto Align on Left Trigger press
   }
 
   /* METHOD FOR BUILDING THE DRIVER DASHBOARD DURING BOOT-UP */
