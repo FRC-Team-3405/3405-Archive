@@ -49,7 +49,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     xbox.rightBumper().onTrue(m_drive.ShiftGears()); // Shift Gears
-    xbox.rightTrigger().onTrue(m_intake.ToggleIntake()); // Extend/Retract Intake
+    xbox.b().onTrue(m_intake.ToggleIntake()); // Extend/Retract Intake
   }
 
   /* METHOD FOR BUILDING THE DRIVER DASHBOARD DURING BOOT-UP */
