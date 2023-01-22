@@ -4,23 +4,24 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration; // TalonFX Stator Current Limit
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration; // TalonFX Supply Current Limit
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX; // TalonFX
+import com.ctre.phoenix.sensors.WPI_Pigeon2; // Pigeon 2.0 IMU
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX; // TalonFX
-import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration; // TalonFX Stator Current Limit
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration; // TalonFX Supply Current Limit
-import com.ctre.phoenix.sensors.WPI_Pigeon2; // Pigeon 2.0 IMU
 
 public class Drivetrain extends SubsystemBase {
   /* Pneumatics */
@@ -59,6 +60,7 @@ public class Drivetrain extends SubsystemBase {
     m_shift.set(Value.kForward); // Set the Shifter to Low Gear
     rightMotors.setInverted(true); // Invert the Right Motors
     resetEncoders(); // Reset the Encoders
+    setNeutralMode(false); // Set the Neutral Mode to Coast
   }
 
   // Shift Gears Command
@@ -82,6 +84,22 @@ public class Drivetrain extends SubsystemBase {
   // Get the Right Encoder Count
   public double getRightEncoder() {
     return m_rightEncoder.get();
+  }
+
+  /* MOTOR DATA */
+  // Set the Neutral Mode (Brake or Coast)
+  public void setNeutralMode(boolean brake) {
+    if (getPitch() > Constants.MINPITCH || getPitch() < -Constants.MINPITCH) {
+      frontRight.setNeutralMode(NeutralMode.Brake);
+      backRight.setNeutralMode(NeutralMode.Brake);
+      frontLeft.setNeutralMode(NeutralMode.Brake);
+      backLeft.setNeutralMode(NeutralMode.Brake);
+    } else {
+      frontRight.setNeutralMode(NeutralMode.Coast);
+      backRight.setNeutralMode(NeutralMode.Coast);
+      frontLeft.setNeutralMode(NeutralMode.Coast);
+      backLeft.setNeutralMode(NeutralMode.Coast);
+    }
   }
 
   /* PNEUMATICS DATA */

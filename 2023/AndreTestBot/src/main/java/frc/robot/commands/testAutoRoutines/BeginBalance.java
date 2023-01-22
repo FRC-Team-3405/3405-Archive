@@ -5,6 +5,7 @@
 package frc.robot.commands.testAutoRoutines;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class BeginBalance extends CommandBase {
@@ -34,6 +35,6 @@ public class BeginBalance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.m_drive.getPitch() > 15;
+    return RobotContainer.m_drive.getPitch() > Constants.MINPITCH;
   }
 }

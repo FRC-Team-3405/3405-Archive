@@ -22,6 +22,7 @@ public final class Constants {
   public static final int BR_TALONFX = 2; // Back Right TalonFX
   public static final int FL_TALONFX = 3; // Front Left TalonFX
   public static final int BL_TALONFX = 4; // Back Left TalonFX
+  public static final int MINPITCH = 15;
   // Pigeon 2.0 IMU
   public static final int P_PIGEON = 14; // Pigeon 2.0 IMU
 
