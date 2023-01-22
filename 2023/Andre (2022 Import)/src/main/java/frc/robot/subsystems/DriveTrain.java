@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
 // import edu.wpi.first.math.geometry.Rotation2d;
@@ -40,6 +41,8 @@ public class DriveTrain extends SubsystemBase {
   private final WPI_TalonFX backLeft = new WPI_TalonFX(DriveConstants.BL_TALONFX);
   private final WPI_TalonFX frontRight = new WPI_TalonFX(DriveConstants.FR_TALONFX);
   private final WPI_TalonFX backRight = new WPI_TalonFX(DriveConstants.BR_TALONFX);
+
+  public static WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(14);
   
 
   // The motors on the left side of the drive.
@@ -126,6 +129,11 @@ public class DriveTrain extends SubsystemBase {
     m_shift.toggle();
     LowGear = !LowGear;
     System.out.println("Low Gear");
+  }
+
+  // Get Pitch from Pigeon2
+  public double getPitch() {
+    return m_pigeon.getPitch();
   }
 
   // Test Stuff
