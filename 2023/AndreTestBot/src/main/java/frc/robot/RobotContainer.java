@@ -77,7 +77,6 @@ public class RobotContainer {
     driveDash.add("Compressor Current", m_drive.getCurrent()).withPosition(2,6).withSize(1,1);
     driveDash.add("Pressure Switch", m_drive.getPressureSwitch()).withPosition(2,7).withSize(1,1).withWidget(BuiltInWidgets.kBooleanBox);
     driveDash.add("Intake Status", m_intake.getIntakeStatus()).withPosition(3,5).withSize(1,1).withWidget(BuiltInWidgets.kBooleanBox);
-
   }
 
   /**
