@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.Limelight.LightMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -37,6 +38,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+    // Set Default Command
+    m_drive.setDefaultCommand(new arcadeDrive());
+    m_shooter.setDefaultCommand(new AutoShoot());
+    m_intake.setDefaultCommand(m_intake.ToggleIntake());
+    Limelight.setLedMode(LightMode.eOff);
   }
 
   /**
