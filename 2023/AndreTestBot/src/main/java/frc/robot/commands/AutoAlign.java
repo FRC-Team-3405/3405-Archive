@@ -20,6 +20,7 @@ public class AutoAlign extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_drive);
     t = new Timer();
+    RobotContainer.m_drive.setNeutralMode(true); // Set the Neutral Mode to Brake during alignment
   }
 
   // Called when the command is initially scheduled.
