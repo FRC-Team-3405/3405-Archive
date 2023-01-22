@@ -28,6 +28,7 @@ public class Drivetrain extends SubsystemBase {
   private static Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM); // Compressor
   public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.LOWGEAR, Constants.HIGHGEAR); // Shifter
   public static boolean LowGear = false; // Low Gear
+  public static boolean brake = false; // Brake Mode
   /* Drivetrain */
   // Motors
   private final WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FR_TALONFX); // Front Right TalonFX
@@ -99,7 +100,12 @@ public class Drivetrain extends SubsystemBase {
       backRight.setNeutralMode(NeutralMode.Coast);
       frontLeft.setNeutralMode(NeutralMode.Coast);
       backLeft.setNeutralMode(NeutralMode.Coast);
+      brake = !brake;
     }
+  }
+  // Get the Neutral Mode for the Drive Dashboard
+  public boolean getNeutralMode() {
+    return brake;
   }
 
   /* PNEUMATICS DATA */
