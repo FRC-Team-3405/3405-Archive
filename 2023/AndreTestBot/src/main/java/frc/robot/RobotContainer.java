@@ -50,6 +50,7 @@ public class RobotContainer {
   private void configureBindings() {
     xbox.rightBumper().onTrue(m_drive.ShiftGears()); // Shift Gears
     xbox.b().onTrue(m_intake.ToggleIntake()); // Extend/Retract Intake
+    xbox.a().onTrue(new DriveForward()); // Drive Forward for 1.5 seconds on button press TEST TEST TEST
   }
 
   /* METHOD FOR BUILDING THE DRIVER DASHBOARD DURING BOOT-UP */
