@@ -6,9 +6,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class DFARSHAR extends SequentialCommandGroup {
+public class DFDB extends SequentialCommandGroup {
   /** Creates a new DFARSHAR. */
-  public DFARSHAR() {
+  public DFDB() {
     addCommands(
       new DriveForward(),
       new DriveBackward()

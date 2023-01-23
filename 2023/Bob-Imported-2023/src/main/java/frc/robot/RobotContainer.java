@@ -54,7 +54,7 @@ public class RobotContainer {
     m_autoChoice = new SendableChooser<Command>();
     m_autoChoice.addOption("Forward", new DriveForward()); // Drive forward for 1 second
     m_autoChoice.addOption("Backward", new DriveBackward()); // Drive backward for 1 second
-    m_autoChoice.addOption("Both", new DFARSHAR()); // Do DriveForward, then DriveBackward
+    m_autoChoice.addOption("Both", new DFDB()); // Do DriveForward, then DriveBackward
     m_autoChoice.addOption("Self Destruct", new SelfDestruct()); // Spin really really fast (see: Anakin Skywalker)
     m_autoChoice.setDefaultOption("Self Destruct", new SelfDestruct()); // Default
     driveTab.add("Autonomous Chooser", m_autoChoice).withWidget(BuiltInWidgets.kComboBoxChooser).withPosition(0, 0).withSize(2, 1);
