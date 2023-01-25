@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -36,6 +39,8 @@ public class Drivetrain extends SubsystemBase {
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   // Pigeon 2.0 IMU
   private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
+  private NetworkTableEntry yawEntry;
+  private NetworkTableEntry pitchEntry;
   // Current Limits
   void setFalconLimit(WPI_TalonFX falcon) {
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
@@ -47,7 +52,12 @@ public class Drivetrain extends SubsystemBase {
     setFalconLimit(backRight); // Set Falcon Current Limits (BR)
     setFalconLimit(frontLeft); // Set Falcon Current Limits (FL)
     setFalconLimit(backLeft); // Set Falcon Current Limits (BL)
+    rightMotors.setInverted(true); // Invert Right Motors
     m_shift.set(Value.kForward); // Set Shifter to Low Gear
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("Pigeon2");
+    yawEntry = table.getEntry("Yaw");
+    pitchEntry = table.getEntry("Pitch");
   }
 
   // Shift Gears Command
@@ -68,6 +78,10 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    double[] ypr = new double[3];
+    m_pigeon.getYawPitchRoll(ypr);
+    yawEntry.setDouble(ypr[0]);
+    pitchEntry.setDouble(ypr[1]);
   }
 
   // Shift Gears
