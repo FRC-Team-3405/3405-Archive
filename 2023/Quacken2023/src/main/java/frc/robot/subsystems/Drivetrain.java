@@ -5,7 +5,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -30,10 +34,16 @@ public class Drivetrain extends SubsystemBase {
   private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight); // Right Motors
   private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft); // Left Motors
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
+  /* Pigeon 2.0 */
+  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon2.0
+  private NetworkTableEntry pitchEntry;
   /** Creates a new Drivetrain. */
   public Drivetrain() {
     rightMotors.setInverted(true);
     m_shift.set(Value.kForward);
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("Pigeon2");
+    pitchEntry = table.getEntry("Pitch");
   }
 
   // Shift Gears Command
@@ -76,5 +86,7 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    double pitch = m_pigeon.getPitch();
+    pitchEntry.setDouble(pitch);
   }
 }

@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration; // TalonFX
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX; // TalonFX
 import com.ctre.phoenix.sensors.WPI_Pigeon2; // Pigeon 2.0 IMU
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -19,6 +20,8 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -52,6 +55,9 @@ public class Drivetrain extends SubsystemBase {
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
     falcon.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 70, 90, 1));
   }
+  // Shuffleboard Data
+  private ShuffleboardTab driveTab = Shuffleboard.getTab("Drivetrain");
+  private GenericEntry pigeonPitch = driveTab.add("Pitch", 0).getEntry(); // try replacing 0 with m_pigeon.getPitch or getPitch().
   /** Creates a new Drivetrain. */
   public Drivetrain() {
     setFalconLimit(frontRight); // Limit the Front Right TalonFX
@@ -61,7 +67,8 @@ public class Drivetrain extends SubsystemBase {
     m_shift.set(Value.kForward); // Set the Shifter to Low Gear
     rightMotors.setInverted(true); // Invert the Right Motors
     resetEncoders(); // Reset the Encoders
-    setNeutralMode(false); // Set the Neutral Mode to Coast
+    setNeutralMode(NeutralMode.Coast); // Set the Neutral Mode to Coast
+    m_pigeon.reset();
   }
 
   // Shift Gears Command
@@ -89,7 +96,7 @@ public class Drivetrain extends SubsystemBase {
 
   /* MOTOR DATA */
   // Set the Neutral Mode (Brake or Coast)
-  public void setNeutralMode(boolean brake) {
+  public void setNeutralMode(NeutralMode mode) {
     if (getPitch() > Constants.MINPITCH || getPitch() < -Constants.MINPITCH) {
       frontRight.setNeutralMode(NeutralMode.Brake);
       backRight.setNeutralMode(NeutralMode.Brake);
@@ -134,7 +141,9 @@ public class Drivetrain extends SubsystemBase {
   /* PIGEON DATA */
   // Get Pigeon Pitch
   public double getPitch() {
-    return m_pigeon.getPitch();
+    double pitch = m_pigeon.getPitch();
+    pigeonPitch.setDouble(pitch);
+    return pitch;
   }
   // Get Pigeon Roll
   public double getRoll() {
@@ -165,7 +174,7 @@ public class Drivetrain extends SubsystemBase {
     m_drive.arcadeDrive(fwd, rot);
   }
   @Override
-  public void periodic() {
+  public void periodic() { // Something to try: place all the values we need to update in this box here? Or place all updating values below periodic?
     // This method will be called once per scheduler run
   }
 }

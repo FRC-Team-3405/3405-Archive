@@ -18,25 +18,26 @@ public final class Constants {
   public static final int HIGHGEAR = 2; // High Gear Solenoid
   public static final int LOWGEAR = 3; // Low Gear Solenoid
   // Motors
-  public static final int FR_TALONFX = 1; // Front Right TalonFX
-  public static final int BR_TALONFX = 2; // Back Right TalonFX
-  public static final int FL_TALONFX = 3; // Front Left TalonFX
-  public static final int BL_TALONFX = 4; // Back Left TalonFX
-  public static final int MINPITCH = 15;
+  public static final int FR_TALONFX = 2; // Front Right TalonFX
+  public static final int BR_TALONFX = 3; // Back Right TalonFX
+  public static final int FL_TALONFX = 4; // Front Left TalonFX
+  public static final int BL_TALONFX = 5; // Back Left TalonFX
+  public static final double MINPITCH = -5.0; // Minimum Pitch to Activate Brake Mode
+  public static final double MAXPOWER = 0.8; // Maximum motor output (80%)
   // Pigeon 2.0 IMU
-  public static final int P_PIGEON = 14; // Pigeon 2.0 IMU
+  public static final int P_PIGEON = 6; // Pigeon 2.0 IMU
 
   /** Intake Constants */
-  public static final int INTAKE_SRX = 10; // Intake TalonSRX
+  public static final int INTAKE_SRX = 7; // Intake TalonSRX
   public static final int INTAKE_IN = 6;
   public static final int INTAKE_OUT = 7;
 
   /** Shooter Constants */
-  public static final int RS_TALONFX = 20; // Right Shooter TalonFX
-  public static final int LS_TALONFX = 21; // Left Shooter TalonFX
-  public static final int LTM_TALONSRX = 5; // Lower Tower Motor TalonSRX
-  public static final int UTM_TALONSRX = 6; // Upper Tower Motor TalonSRX
-  public static final int STM_VICTORSPX = 7; // Intake VictorSPX
+  public static final int RS_TALONFX = 8; // Right Shooter TalonFX
+  public static final int LS_TALONFX = 9; // Left Shooter TalonFX
+  public static final int LTM_TALONSRX = 10; // Lower Tower Motor TalonSRX
+  public static final int UTM_TALONSRX = 11; // Upper Tower Motor TalonSRX
+  public static final int STM_VICTORSPX = 12; // Intake VictorSPX
 
   /** Limelight Constants */
   public static final double KNOWN_DISTANCE = 3.048; // 10 Feet (120 inches in meters)
@@ -51,6 +52,6 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int P_XBOX = 0; // Controller Port
     public static final int XBOX_XAXIS = 1; // X Axis on Xbox Controller
-    public static final int XBOX_YAXIS = 3; // Y Axis on Xbox Controller
+    public static final int XBOX_YAXIS = 4; // Y Axis on Xbox Controller
   }
 }

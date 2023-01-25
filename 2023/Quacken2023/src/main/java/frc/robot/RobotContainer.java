@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -27,8 +28,8 @@ public class RobotContainer {
   private static SendableChooser<Command> m_autoChoice;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  public final static CommandXboxController xbox =
-      new CommandXboxController(OperatorConstants.P_XBOX);
+  public final static CommandJoystick joystick =
+      new CommandJoystick(OperatorConstants.P_JOYSTICK);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -48,13 +49,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    // new Trigger(m_exampleSubsystem::exampleCondition)
-    //     .onTrue(new ExampleCommand(m_exampleSubsystem));
-
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    xbox.rightTrigger().onTrue(m_drive.ShiftGears());
+    joystick.button(1).onTrue(m_drive.ShiftGears());
   }
 
   /* METHOD FOR BUILDING THE DRIVER DASHBOARD DURING BOOT-UP */
@@ -68,11 +65,6 @@ public class RobotContainer {
     m_autoChoice.addOption("Drive Backward", new DriveBackward()); // DRIVE BACKWARD
     m_autoChoice.addOption("Self Destruct", new SelfDestruct()); // SELF DESTRUCT
     driveDash.add("Auto Selector", m_autoChoice).withPosition(1,5).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(3,1);
-    // Heads-up Display
-    driveDash.add("Low Gear?", m_drive.getShiftStatus()).withPosition(3,4).withSize(1,1).withWidget(BuiltInWidgets.kBooleanBox);
-    driveDash.add("Compressor Status", m_drive.getCompressorState()).withPosition(2,5).withSize(1,1).withWidget(BuiltInWidgets.kBooleanBox);
-    driveDash.add("Compressor Current", m_drive.getCurrent()).withPosition(2,6).withSize(1,1);
-    driveDash.add("Pressure Switch", m_drive.getPressureSwitch()).withPosition(2,7).withSize(1,1).withWidget(BuiltInWidgets.kBooleanBox);
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

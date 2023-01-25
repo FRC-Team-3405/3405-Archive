@@ -8,6 +8,9 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Limelight.LightMode;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -20,7 +23,7 @@ public class AutoAlign extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_drive);
     t = new Timer();
-    RobotContainer.m_drive.setNeutralMode(true); // Set the Neutral Mode to Brake during alignment
+    RobotContainer.m_drive.setNeutralMode(NeutralMode.Brake); // Set the Neutral Mode to Brake during alignment
   }
 
   // Called when the command is initially scheduled.
@@ -69,6 +72,7 @@ public class AutoAlign extends CommandBase {
   public void end(boolean interrupted) {
     isFinished = false;
     Limelight.setLedMode(LightMode.eOff);
+    RobotContainer.m_drive.setNeutralMode(NeutralMode.Coast); // Set the Neutral Mode to Coast after alignment
   }
 
   // Returns true when the command should end.

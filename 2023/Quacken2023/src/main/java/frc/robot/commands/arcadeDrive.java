@@ -22,8 +22,8 @@ public class arcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double moveSpeed = -RobotContainer.xbox.getRawAxis(OperatorConstants.XBOX_XAXIS); // Limit the moveSpeed to 80% Power?
-    double rotateSpeed = RobotContainer.xbox.getRawAxis(OperatorConstants.XBOX_YAXIS); // Limit the rotateSpeed to 80% Power?
+    double moveSpeed = RobotContainer.joystick.getRawAxis(OperatorConstants.XAXIS); // Limit the moveSpeed to 80% Power?
+    double rotateSpeed = RobotContainer.joystick.getRawAxis(OperatorConstants.YAXIS); // Limit the rotateSpeed to 80% Power?
     RobotContainer.m_drive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 

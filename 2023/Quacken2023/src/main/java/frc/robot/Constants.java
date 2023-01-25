@@ -14,17 +14,19 @@ package frc.robot;
  */
 public final class Constants {
   /* Drivetrain */
-  public static final int FR_TALONSRX = 3; // Front Right Motor
-  public static final int BR_TALONSRX = 4; // Back Right Motor
-  public static final int FL_TALONSRX = 1; // Front Left Motor
-  public static final int BL_TALONSRX = 2; // Back Left Motor
+  public static final int FR_TALONSRX = 1; // Front Right Motor
+  public static final int BR_TALONSRX = 2; // Back Right Motor
+  public static final int FL_TALONSRX = 3; // Front Left Motor
+  public static final int BL_TALONSRX = 4; // Back Left Motor
   /* Pneumatics */
   public static final int P_HIGHGEAR = 4; // High Gear Port
   public static final int P_LOWGEAR = 5; // Low Gear Port
+  /* Pigeon2.0 */
+  public static final int P_PIGEON = 5;
   /* Operator Interface */
   public static class OperatorConstants {
-    public static final int P_XBOX = 0;
-    public static final int XBOX_XAXIS = 0;
-    public static final int XBOX_YAXIS = 1;
+    public static final int P_JOYSTICK = 0;
+    public static final int XAXIS = 1;
+    public static final int YAXIS = 0;
   }
 }

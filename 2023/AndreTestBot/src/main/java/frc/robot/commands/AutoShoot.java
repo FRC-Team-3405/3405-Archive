@@ -7,7 +7,7 @@ import frc.robot.RobotContainer;
 public class AutoShoot extends CommandBase {
     Timer t;
     public AutoShoot() {
-        addRequirements(RobotContainer.m_drive);
+        addRequirements(RobotContainer.m_shooter);
     }
 
     @Override

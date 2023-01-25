@@ -33,7 +33,7 @@ public class Intake extends SubsystemBase {
     //** TALONSRX CURRENT LIMITS (Intake Motor) */
     motor.configPeakCurrentLimit(30); // don't activate current limit until current exceeds 30 A ...
     motor.configPeakCurrentDuration(100); // ... for at least 100 ms
-    motor.configContinuousCurrentLimit(15); // once current-limiting is actived, hold at 20A
+    motor.configContinuousCurrentLimit(15); // once current-limiting is active, hold at 20A
     motor.enableCurrentLimit(true);
 
     if (extended) {
@@ -45,6 +45,7 @@ public class Intake extends SubsystemBase {
   // Extend or retract the intake
   public void extend() {
     extender.toggle();
+    setMotor();
     extended = !extended;
   }
   // Get the status of the intake
