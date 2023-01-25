@@ -41,6 +41,9 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
   private NetworkTableEntry yawEntry;
   private NetworkTableEntry pitchEntry;
+  private NetworkTableEntry rollEntry;
+  private NetworkTableEntry tempEntry;
+  private double pitchVal;
   // Current Limits
   void setFalconLimit(WPI_TalonFX falcon) {
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
@@ -58,6 +61,8 @@ public class Drivetrain extends SubsystemBase {
     NetworkTable table = inst.getTable("Pigeon2");
     yawEntry = table.getEntry("Yaw");
     pitchEntry = table.getEntry("Pitch");
+    rollEntry = table.getEntry("Roll");
+    tempEntry = table.getEntry("Temperature"); // Possibly Unnecessary, but could be good for troubleshooting
   }
 
   // Shift Gears Command
@@ -68,6 +73,20 @@ public class Drivetrain extends SubsystemBase {
         });
   }
 
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    double yaw = m_pigeon.getYaw(); // Get pitch periodically via NetworkTables
+    yawEntry.setDouble(yaw); // Set YAW entry
+    double pitch = m_pigeon.getPitch(); // Get pitch periodically via NetworkTables
+    pitchEntry.setDouble(pitch); // Set PITCH entry
+    double roll = m_pigeon.getRoll(); // Get roll periodically via NetworkTables
+    rollEntry.setDouble(roll); // Set ROLL entry
+    double temp = m_pigeon.getTemp(); // Get temperature periodically via NetworkTables
+    tempEntry.setDouble(temp);
+    pitchVal = pitch; // Will this periodically update the pitch? Hopefully.
+  }
+
   // Query Status of Pitch; Return true if less than -5 or greater than 5.
   public boolean onSlope() {
     System.out.println("Pigeon is Active!");
@@ -75,13 +94,9 @@ public class Drivetrain extends SubsystemBase {
     return m_pigeon.getPitch() < Constants.MINPITCH || m_pigeon.getPitch() > Constants.MAXPITCH;
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    double[] ypr = new double[3];
-    m_pigeon.getYawPitchRoll(ypr);
-    yawEntry.setDouble(ypr[0]);
-    pitchEntry.setDouble(ypr[1]);
+  public boolean onSlopeQuestion() {
+    System.out.println("Pigeon is still Active!");
+    return pitchVal < Constants.MINPITCH || pitchVal > Constants.MAXPITCH; // Testing things
   }
 
   // Shift Gears

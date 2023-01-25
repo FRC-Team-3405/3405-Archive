@@ -53,7 +53,7 @@ public class RobotContainer {
     // cancelling on release.
     xbox.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     xbox.rightBumper().onTrue(m_drive.ShiftGears());
-    xbox.leftBumper().whileTrue(new setBrake()).whileFalse(new setCoast()); // Set Brake Mode while left bumper is pressed, Set Coast Mode when left bumper is released
+    xbox.leftBumper().onTrue(new setBrake()).onFalse(new setCoast()); // Set Brake Mode while left bumper is pressed, Set Coast Mode when left bumper is released
 
   }
 

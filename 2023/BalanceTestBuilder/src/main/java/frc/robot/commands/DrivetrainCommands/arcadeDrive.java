@@ -24,7 +24,7 @@ public class arcadeDrive extends CommandBase {
   @Override
   public void execute() {
     double moveSpeed = -RobotContainer.xbox.getRawAxis(OperatorConstants.XAXIS)*Constants.MAXPOWER; // Limit the moveSpeed to 80% Power
-    double rotateSpeed = RobotContainer.xbox.getRawAxis(OperatorConstants.YAXIS)*Constants.MAXPOWER; // Limit the rotateSpeed to 80% Power
+    double rotateSpeed = -RobotContainer.xbox.getRawAxis(OperatorConstants.YAXIS)*Constants.MAXPOWER; // Limit the rotateSpeed to 80% Power
     RobotContainer.m_drive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
