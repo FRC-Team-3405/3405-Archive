@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AutoCommands.*;
 import frc.robot.commands.DrivetrainCommands.*;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -53,7 +54,7 @@ public class RobotContainer {
     // cancelling on release.
     xbox.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     xbox.rightBumper().onTrue(m_drive.ShiftGears());
-    xbox.leftBumper().onTrue(new setBrake()).onFalse(new setCoast()); // Set Brake Mode while left bumper is pressed, Set Coast Mode when left bumper is released
+    xbox.leftBumper().whileTrue(m_drive.ChangeMode()); // Set Brake Mode while left bumper is pressed, Set Coast Mode when left bumper is released
 
   }
 
@@ -64,6 +65,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // arcadeDrive will run in autonomous
-    return new arcadeDrive();
+    return new AutoBalance();
   }
 }

@@ -43,7 +43,7 @@ public class Drivetrain extends SubsystemBase {
   private NetworkTableEntry pitchEntry;
   private NetworkTableEntry rollEntry;
   private NetworkTableEntry tempEntry;
-  private double pitchVal;
+  public double pitchVal;
   // Current Limits
   void setFalconLimit(WPI_TalonFX falcon) {
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
@@ -63,6 +63,7 @@ public class Drivetrain extends SubsystemBase {
     pitchEntry = table.getEntry("Pitch");
     rollEntry = table.getEntry("Roll");
     tempEntry = table.getEntry("Temperature"); // Possibly Unnecessary, but could be good for troubleshooting
+    setCoast(NeutralMode.Coast);
   }
 
   // Shift Gears Command
@@ -71,6 +72,14 @@ public class Drivetrain extends SubsystemBase {
         () -> {
           shift();
         });
+  }
+
+  // Possible workaround
+  public CommandBase ChangeMode() {
+    return run(
+      () -> {
+        setBrake(NeutralMode.Brake);
+      });
   }
 
   @Override
@@ -85,17 +94,15 @@ public class Drivetrain extends SubsystemBase {
     double temp = m_pigeon.getTemp(); // Get temperature periodically via NetworkTables
     tempEntry.setDouble(temp);
     pitchVal = pitch; // Will this periodically update the pitch? Hopefully.
+    onSlope();
+    if (onSlope() == true) {
+      setBrake(NeutralMode.Brake);
+    } else {
+      setCoast(NeutralMode.Coast);
+    }
   }
 
-  // Query Status of Pitch; Return true if less than -5 or greater than 5.
   public boolean onSlope() {
-    System.out.println("Pigeon is Active!");
-    // Query the boolean state of the Pigeon2.0 IMU.
-    return m_pigeon.getPitch() < Constants.MINPITCH || m_pigeon.getPitch() > Constants.MAXPITCH;
-  }
-
-  public boolean onSlopeQuestion() {
-    System.out.println("Pigeon is still Active!");
     return pitchVal < Constants.MINPITCH || pitchVal > Constants.MAXPITCH; // Testing things
   }
 
@@ -110,21 +117,31 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double fwd, double rot) {
     m_drive.arcadeDrive(fwd, rot);
   }
+  
+  /**
+   * Controls the left and right sides of the drive directly with voltages.
+   *
+   * @param leftVolts the commanded left output
+   * @param rightVolts the commanded right output
+   */
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftMotors.setVoltage(leftVolts);
+    rightMotors.setVoltage(rightVolts);
+    m_drive.feed();
+  }
 
   // Set Brake Mode
-  public void setBrake() {
+  public void setBrake(NeutralMode mode) {
     frontRight.setNeutralMode(NeutralMode.Brake);
     backRight.setNeutralMode(NeutralMode.Brake);
     frontLeft.setNeutralMode(NeutralMode.Brake);
     backLeft.setNeutralMode(NeutralMode.Brake);
-    System.out.println("Drivetrain has set Neutral Mode to Brake.");
   }
   // Set Coast Mode
-  public void setCoast() {
+  public void setCoast(NeutralMode mode) {
     frontRight.setNeutralMode(NeutralMode.Coast);
     backRight.setNeutralMode(NeutralMode.Coast);
     frontLeft.setNeutralMode(NeutralMode.Coast);
     backLeft.setNeutralMode(NeutralMode.Coast);
-    System.out.println("Drivetrain has set Neutral Mode to Coast.");
   }
 }

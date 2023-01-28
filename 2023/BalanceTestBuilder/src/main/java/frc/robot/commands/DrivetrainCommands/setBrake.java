@@ -4,6 +4,8 @@
 
 package frc.robot.commands.DrivetrainCommands;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
@@ -21,14 +23,14 @@ public class setBrake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Neutral Mode set to Brake!");
-    RobotContainer.m_drive.setBrake();
+    // System.out.println("Neutral Mode set to Brake!");
+    RobotContainer.m_drive.setBrake(NeutralMode.Brake);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_drive.setCoast();
+    RobotContainer.m_drive.setCoast(NeutralMode.Coast);
   }
 
   // Returns true when the command should end.
