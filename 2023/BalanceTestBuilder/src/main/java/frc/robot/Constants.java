@@ -29,8 +29,8 @@ public final class Constants {
   public static final int P_PIGEON = 6; // Pigeon 2.0 Port
   public static final double MINPITCH = -7.0; // Degrees
   public static final double MAXPITCH = 7.0; // Degrees
-  public static final double MINBALANCEPITCH = -7.0; // Degrees
-  public static final double MAXBALANCEPITCH = 7.0; // Degrees
+  public static final double MINBALANCEPITCH = -10.0; // Degrees
+  public static final double MAXBALANCEPITCH = 10.0; // Degrees
 
   public static class OperatorConstants {
     public static final int P_XBOX = 0; // Controller Port

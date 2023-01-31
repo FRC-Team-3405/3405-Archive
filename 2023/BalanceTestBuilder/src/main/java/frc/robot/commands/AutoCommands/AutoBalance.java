@@ -15,6 +15,6 @@ public class AutoBalance extends SequentialCommandGroup {
   public AutoBalance() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(RobotContainer.m_drive.ShiftGears(), new BeginBalance(), new Balance()); // REMOVE BALANCE
+    addCommands(RobotContainer.m_drive.ShiftGears(), new BeginBalance(),new TimedBalance());
   }
 }

@@ -4,13 +4,13 @@
 
 package frc.robot.commands.AutoCommands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class Balance extends CommandBase {
-  Timer t;
-  /** Creates a new Balance. */
+  boolean isFinished = false;
+  /** Creates a new CheckBalance. */
   public Balance() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_drive);
@@ -18,26 +18,42 @@ public class Balance extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    t = new Timer();
-    t.start();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(2,2);
+    if (RobotContainer.m_drive.pitchVal < Constants.MAXBALANCEPITCH || RobotContainer.m_drive.pitchVal > Constants.MINBALANCEPITCH){
+      RobotContainer.m_drive.tankDriveVolts(0,0);
+      isFinished = true;
+      return;
+    } 
+    if (RobotContainer.m_drive.pitchVal < Constants.MINBALANCEPITCH){
+      RobotContainer.m_drive.tankDriveVolts(Constants.AUTOBALANCESPEED, Constants.AUTOBALANCESPEED); // Drive forward
+      return;
+      } 
+    else if (RobotContainer.m_drive.pitchVal > Constants.MAXBALANCEPITCH){
+    RobotContainer.m_drive.tankDriveVolts(-Constants.AUTOBALANCESPEED, -Constants.AUTOBALANCESPEED); // Drive backward if necessary
+    }
+
+    // if (RobotContainer.m_drive.onSlope()){
+    //   RobotContainer.m_drive.tankDriveVolts(Constants.AUTOBALANCESPEED, Constants.AUTOBALANCESPEED); // Drive forward
+    //   return;
+    //   } else {
+    //   RobotContainer.m_drive.tankDriveVolts(-Constants.AUTOBALANCESPEED, -Constants.AUTOBALANCESPEED); // Drive backward if necessary
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    t.stop();
+    isFinished = true;
+    RobotContainer.m_drive.tankDriveVolts(0, 0); // Stop the robot when the command ends
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return t.hasElapsed(2.25);
+    return isFinished;
   }
 }
