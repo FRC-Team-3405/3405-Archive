@@ -24,26 +24,25 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
   /* Pneumatics */
-  public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.LOWGEAR, Constants.HIGHGEAR);
-  public static boolean LowGear = false; // Low Gear
+  public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.LOWGEAR, Constants.HIGHGEAR); // Shifter Solenoid
+  public static boolean LowGear = false; // Low Gear is true, High Gear is false
   /* Drivetrain */
   // Motors
-  private final WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FR_TALONFX); // Front Right Talon FX
-  private final WPI_TalonFX backRight = new WPI_TalonFX(Constants.BR_TALONFX); // Back Right Talon FX
-  private final WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.FL_TALONFX); // Front Left Talon FX
-  private final WPI_TalonFX backLeft = new WPI_TalonFX(Constants.BL_TALONFX); // Back Left Talon FX
+  private final WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FR_TALONFX); // Front Right TalonFX
+  private final WPI_TalonFX backRight = new WPI_TalonFX(Constants.BR_TALONFX); // Back Right TalonFX
+  private final WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.FL_TALONFX); // Front Left TalonFX
+  private final WPI_TalonFX backLeft = new WPI_TalonFX(Constants.BL_TALONFX); // Back Left TalonFX
   // Motor Controller Groups
   private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight); // Right Motors
   private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft); // Left Motors
   // Differential Drive
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   // Pigeon 2.0 IMU
-  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
-  private NetworkTableEntry yawEntry;
-  private NetworkTableEntry pitchEntry;
-  private NetworkTableEntry rollEntry;
-  private NetworkTableEntry tempEntry;
-  public double pitchVal;
+  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0 IMU
+  private NetworkTableEntry yawEntry; // Yaw Entry
+  private NetworkTableEntry pitchEntry; // Pitch Entry
+  private NetworkTableEntry rollEntry; // Roll Entry
+  public double pitchValue; // Pitch Value
   // Current Limits
   void setFalconLimit(WPI_TalonFX falcon) {
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
@@ -51,49 +50,44 @@ public class Drivetrain extends SubsystemBase {
   }
   /** Creates a new Drivetrain. */
   public Drivetrain() {
-    setFalconLimit(frontRight); // Set Falcon Current Limits (FR)
-    setFalconLimit(backRight); // Set Falcon Current Limits (BR)
-    setFalconLimit(frontLeft); // Set Falcon Current Limits (FL)
-    setFalconLimit(backLeft); // Set Falcon Current Limits (BL)
+    setFalconLimit(frontRight); // Set Falcon Current Limits (Front Right)
+    setFalconLimit(backRight); // Set Falcon Current Limits (Back Right)
+    setFalconLimit(frontLeft); // Set Falcon Current Limits (Front Left)
+    setFalconLimit(backLeft); // Set Falcon Current Limits (Back Left)
     rightMotors.setInverted(true); // Invert Right Motors
     m_shift.set(Value.kForward); // Set Shifter to Low Gear
-    NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    NetworkTable table = inst.getTable("Pigeon2");
-    yawEntry = table.getEntry("Yaw");
-    pitchEntry = table.getEntry("Pitch");
-    rollEntry = table.getEntry("Roll");
-    tempEntry = table.getEntry("Temperature"); // Possibly Unnecessary, but could be good for troubleshooting
+    NetworkTableInstance inst = NetworkTableInstance.getDefault(); // Get Network Table Instance
+    NetworkTable table = inst.getTable("Pigeon2"); // Get Pigeon Table
+    yawEntry = table.getEntry("Yaw"); // Get Yaw Entry
+    pitchEntry = table.getEntry("Pitch"); // Get Pitch Entry
+    rollEntry = table.getEntry("Roll"); // Get Roll Entry
     setCoast(NeutralMode.Coast);
   }
-
   // Shift Gears Command
   public CommandBase ShiftGears() {
     return runOnce(
-        () -> {
-          shift();
-        });
+      () -> {
+        shift();
+      });
   }
-
-  // Possible workaround
+  // Change Brake/Coast Mode
   public CommandBase ChangeMode() {
     return run(
       () -> {
         setBrake(NeutralMode.Brake);
-      });
+    });
   }
-
+  // Periodic Function
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    double yaw = m_pigeon.getYaw(); // Get pitch periodically via NetworkTables
-    yawEntry.setDouble(yaw); // Set YAW entry
-    double pitch = m_pigeon.getPitch(); // Get pitch periodically via NetworkTables
-    pitchEntry.setDouble(pitch); // Set PITCH entry
-    double roll = m_pigeon.getRoll(); // Get roll periodically via NetworkTables
-    rollEntry.setDouble(roll); // Set ROLL entry
-    double temp = m_pigeon.getTemp(); // Get temperature periodically via NetworkTables
-    tempEntry.setDouble(temp);
-    pitchVal = pitch; // Will this periodically update the pitch? Hopefully.
+    double yaw = m_pigeon.getYaw(); // Get Yaw Periodically
+    yawEntry.setDouble(yaw); // Set Yaw Entry
+    double pitch = m_pigeon.getPitch(); // Get Pitch Periodically
+    pitchEntry.setDouble(pitch); // Set Pitch Entry
+    double roll = m_pigeon.getRoll(); // Get Roll Periodically
+    rollEntry.setDouble(roll); // Set Roll Entry
+    pitchValue = pitch; // Set Pitch Value
     onSlope();
     if (onSlope() == true) {
       setBrake(NeutralMode.Brake);
@@ -101,35 +95,25 @@ public class Drivetrain extends SubsystemBase {
       setCoast(NeutralMode.Coast);
     }
   }
-
+  // onSlope Query
   public boolean onSlope() {
-    return pitchVal < Constants.MINPITCH || pitchVal > Constants.MAXPITCH; // Testing things
+    return pitchValue < Constants.MINSEEKPITCH || pitchValue > Constants.MAXSEEKPITCH;
   }
-
-  // Shift Gears
+  // Shift Gears Method
   public void shift() {
     m_shift.toggle();
     LowGear = !LowGear;
   }
-
-  /* ARCADE DRIVE */
-  // Arcade Drive
+  // ARCADE DRIVE
   public void arcadeDrive(double fwd, double rot) {
     m_drive.arcadeDrive(fwd, rot);
   }
-  
-  /**
-   * Controls the left and right sides of the drive directly with voltages.
-   *
-   * @param leftVolts the commanded left output
-   * @param rightVolts the commanded right output
-   */
+  // TANK DRIVE
   public void tankDriveVolts(double leftVolts, double rightVolts) {
     leftMotors.setVoltage(leftVolts);
     rightMotors.setVoltage(rightVolts);
     m_drive.feed();
   }
-
   // Set Brake Mode
   public void setBrake(NeutralMode mode) {
     frontRight.setNeutralMode(NeutralMode.Brake);
