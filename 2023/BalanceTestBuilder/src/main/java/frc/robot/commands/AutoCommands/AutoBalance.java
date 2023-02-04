@@ -6,6 +6,7 @@ package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
+import frc.robot.commands.DrivetrainCommands.setBrake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -15,6 +16,6 @@ public class AutoBalance extends SequentialCommandGroup {
   public AutoBalance() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(RobotContainer.m_drive.ShiftGears(), new BeginBalance(),new Balance());
+    addCommands(new BeginBalance(), RobotContainer.m_drive.ShiftGears(), new Balance(), new TimedBalance(), new setBrake());
   }
 }

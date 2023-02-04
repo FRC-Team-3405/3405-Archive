@@ -26,7 +26,7 @@ public class TimedBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(2,2);
+    RobotContainer.m_drive.tankDriveVolts(-2,-2);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,6 +38,6 @@ public class TimedBalance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return t.hasElapsed(2.25);
+    return t.hasElapsed(.15);
   }
 }

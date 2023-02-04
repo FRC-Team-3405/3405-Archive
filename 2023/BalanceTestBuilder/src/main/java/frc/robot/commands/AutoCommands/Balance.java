@@ -23,18 +23,21 @@ public class Balance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.m_drive.pitchVal < Constants.MAXBALANCEPITCH || RobotContainer.m_drive.pitchVal > Constants.MINBALANCEPITCH){
+    if (RobotContainer.m_drive.pitchVal < Constants.MINBALANCEPITCH){
+      RobotContainer.m_drive.tankDriveVolts(Constants.AUTOBALANCESPEED, Constants.AUTOBALANCESPEED); // Drive forward
+      isFinished = false;
+      return;
+      } 
+    if (RobotContainer.m_drive.pitchVal > Constants.MINBALANCEPITCH || RobotContainer.m_drive.pitchVal < Constants.MAXBALANCEPITCH){
       RobotContainer.m_drive.tankDriveVolts(0,0);
       isFinished = true;
       return;
     } 
-    if (RobotContainer.m_drive.pitchVal < Constants.MINBALANCEPITCH){
-      RobotContainer.m_drive.tankDriveVolts(Constants.AUTOBALANCESPEED, Constants.AUTOBALANCESPEED); // Drive forward
-      return;
-      } 
-    else if (RobotContainer.m_drive.pitchVal > Constants.MAXBALANCEPITCH){
-    RobotContainer.m_drive.tankDriveVolts(-Constants.AUTOBALANCESPEED, -Constants.AUTOBALANCESPEED); // Drive backward if necessary
-    }
+    // else if (RobotContainer.m_drive.pitchVal > Constants.MAXBALANCEPITCH){
+    //   RobotContainer.m_drive.tankDriveVolts(-Constants.AUTOBALANCESPEED, -Constants.AUTOBALANCESPEED); // Drive backward if necessary
+    //   isFinished = false;
+    //   return;
+    // }
 
     // if (RobotContainer.m_drive.onSlope()){
     //   RobotContainer.m_drive.tankDriveVolts(Constants.AUTOBALANCESPEED, Constants.AUTOBALANCESPEED); // Drive forward
@@ -47,7 +50,7 @@ public class Balance extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    isFinished = true;
+    isFinished = false;
     RobotContainer.m_drive.tankDriveVolts(0, 0); // Stop the robot when the command ends
   }
 
