@@ -10,9 +10,9 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class BalanceAuto extends SequentialCommandGroup {
+public class BalanceAutoSequence extends SequentialCommandGroup {
   /** Creates a new BalanceAuto. */
-  public BalanceAuto() {
+  public BalanceAutoSequence() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new StartExit(), RobotContainer.m_drive.ShiftGears(), new CrossChargeStation(), RobotContainer.m_drive.ShiftGears(), new AutoBalance());
