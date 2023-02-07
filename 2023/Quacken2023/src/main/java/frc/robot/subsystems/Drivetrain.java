@@ -26,6 +26,8 @@ public class Drivetrain extends SubsystemBase {
   private static Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM); // Compressor
   public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.P_HIGHGEAR, Constants.P_LOWGEAR); // Shifter Solenoid
   public static boolean LowGear = false; // Low Gear
+  private NetworkTableEntry currentEntry; // Compressor Current Draw
+  private NetworkTableEntry shiftEntry; // Shifter state
   /** Drivetrain */
   private final WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.FR_TALONSRX); // Front Right Motor
   private final WPI_TalonSRX backRight = new WPI_TalonSRX(Constants.BR_TALONSRX); // Back Right Motor
@@ -44,6 +46,8 @@ public class Drivetrain extends SubsystemBase {
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
     pitchEntry = table.getEntry("Pitch");
+    currentEntry = table.getEntry("Compressor Current");
+    shiftEntry = table.getEntry("Shifter Status");
   }
 
   // Shift Gears Command
@@ -88,5 +92,9 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
     double pitch = m_pigeon.getPitch();
     pitchEntry.setDouble(pitch);
+    boolean shiftStatus = getShiftStatus();
+    shiftEntry.setBoolean(shiftStatus);
+    double current = m_compressor.getCurrent();
+    currentEntry.setDouble(current);
   }
 }

@@ -38,13 +38,6 @@ public class Balance extends CommandBase {
     //   isFinished = false;
     //   return;
     // }
-
-    // if (RobotContainer.m_drive.onSlope()){
-    //   RobotContainer.m_drive.tankDriveVolts(Constants.AUTOBALANCESPEED, Constants.AUTOBALANCESPEED); // Drive forward
-    //   return;
-    //   } else {
-    //   RobotContainer.m_drive.tankDriveVolts(-Constants.AUTOBALANCESPEED, -Constants.AUTOBALANCESPEED); // Drive backward if necessary
-    // }
   }
 
   // Called once the command ends or is interrupted.

@@ -42,7 +42,6 @@ public class Drivetrain extends SubsystemBase {
   private NetworkTableEntry yawEntry;
   private NetworkTableEntry pitchEntry;
   private NetworkTableEntry rollEntry;
-  private NetworkTableEntry tempEntry;
   public double pitchVal;
   // Current Limits
   void setFalconLimit(WPI_TalonFX falcon) {
@@ -62,7 +61,6 @@ public class Drivetrain extends SubsystemBase {
     yawEntry = table.getEntry("Yaw");
     pitchEntry = table.getEntry("Pitch");
     rollEntry = table.getEntry("Roll");
-    tempEntry = table.getEntry("Temperature"); // Possibly Unnecessary, but could be good for troubleshooting
     setCoast(NeutralMode.Coast);
   }
 
@@ -91,8 +89,6 @@ public class Drivetrain extends SubsystemBase {
     pitchEntry.setDouble(pitch); // Set PITCH entry
     double roll = m_pigeon.getRoll(); // Get roll periodically via NetworkTables
     rollEntry.setDouble(roll); // Set ROLL entry
-    double temp = m_pigeon.getTemp(); // Get temperature periodically via NetworkTables
-    tempEntry.setDouble(temp);
     pitchVal = pitch; // Will this periodically update the pitch? Hopefully.
     onSlope();
     if (onSlope() == true) {
