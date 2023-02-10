@@ -25,7 +25,7 @@ import frc.robot.Constants;
 public class Drivetrain extends SubsystemBase {
   /* Pneumatics */
   public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.LOWGEAR, Constants.HIGHGEAR);
-  public static boolean LowGear = false; // Low Gear
+  public static boolean HighGear = false; // Low Gear
   /* Drivetrain */
   // Motors
   private final WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FR_TALONFX); // Front Right Talon FX
@@ -55,7 +55,7 @@ public class Drivetrain extends SubsystemBase {
     setFalconLimit(frontLeft); // Set Falcon Current Limits (FL)
     setFalconLimit(backLeft); // Set Falcon Current Limits (BL)
     rightMotors.setInverted(true); // Invert Right Motors
-    m_shift.set(Value.kForward); // Set Shifter to Low Gear
+    m_shift.set(Value.kReverse); // Set Shifter to Low Gear
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
     yawEntry = table.getEntry("Yaw");
@@ -105,7 +105,7 @@ public class Drivetrain extends SubsystemBase {
   // Shift Gears
   public void shift() {
     m_shift.toggle();
-    LowGear = !LowGear;
+    HighGear = !HighGear;
   }
 
   /* ARCADE DRIVE */

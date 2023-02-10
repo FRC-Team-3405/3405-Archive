@@ -24,13 +24,17 @@ public final class Constants {
   public static final int BL_TALONFX = 5; // Back Left Talon FX Port
   public static final double MAXPOWER = 0.8; // Percent
   public static final int AUTOSPEED = 4; // VOLTS; Speed for driving on flat surfaces during autonomous
-  public static final int AUTOBALANCESPEED = 2; // VOLTS; Speed for driving on slopes during autonomous
+  public static final double AUTOBALANCESPEED = 2.0; // VOLTS; Speed for driving on slopes during autonomous
+  public static final double SECONDARYBALANCESPEED = 1.5; // VOLTS; Speed for driving on slopes during autonomous
+  public static final double TIMESPACE = 0.35; // Seconds
   // Pigeon 2.0 IMU
   public static final int P_PIGEON = 6; // Pigeon 2.0 Port
   public static final double MINPITCH = -7.0; // Degrees
   public static final double MAXPITCH = 7.0; // Degrees
   public static final double MINBALANCEPITCH = -9.75; // Degrees
   public static final double MAXBALANCEPITCH = 9.75; // Degrees
+  public static final double MINSECONDARYBALANCE = -6.5; // Degrees
+  public static final double MAXSECONDARYBALANCE = 6.5;
 
   public static class OperatorConstants {
     public static final int P_XBOX = 0; // Controller Port
