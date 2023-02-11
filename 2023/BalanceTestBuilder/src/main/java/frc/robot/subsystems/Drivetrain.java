@@ -55,7 +55,7 @@ public class Drivetrain extends SubsystemBase {
     setFalconLimit(frontLeft); // Set Falcon Current Limits (FL)
     setFalconLimit(backLeft); // Set Falcon Current Limits (BL)
     rightMotors.setInverted(true); // Invert Right Motors
-    m_shift.set(Value.kReverse); // Set Shifter to Low Gear
+    m_shift.set(Value.kReverse); // Set Shifter to High Gear
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
     yawEntry = table.getEntry("Yaw");

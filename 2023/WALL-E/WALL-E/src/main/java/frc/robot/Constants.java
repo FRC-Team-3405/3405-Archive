@@ -25,20 +25,40 @@ public final class Constants {
   public static final int FL_TALONFX = 4; // Front Left TalonFX
   public static final int BL_TALONFX = 5; // Back Left TalonFX
   public static final double MAXPOWER = 0.8; // Max Power (Percent)
-  public static final int AUTOSPEED = 4; // VOLTS; Speed for driving on flat surfaces during autonomous
-  public static final int AUTOBALANCESPEED = 2; // VOLTS; Speed for driving on slopes during autonomous
+  public static final double AUTOSPEED = 4.0; // VOLTS; Speed for driving on flat surfaces during autonomous
+  public static final double AUTOBALANCESPEED = 2.0; // VOLTS; Speed for driving on slopes during autonomous
+  public static final double SECONDARYBALANCESPEED = 1.5; // VOLTS; Speed for driving on slopes during autonomous
+  public static final double TIMESPACE = 0.35; // Seconds
   // Pigeon 2.0 IMU
   public static final int P_PIGEON = 6; // Pigeon 2.0 Port
   public static final double MINSEEKPITCH = -7.0; // Degrees
   public static final double MAXSEEKPITCH = 7.0; // Degrees
-  public static final double MINBALANCEPITCH = -10.0; // Degrees
-  public static final double MAXBALANCEPITCH = 10.0; // Degrees
+  public static final double MINBALANCEPITCH = -9.75; // Degrees
+  public static final double MAXBALANCEPITCH = 9.75; // Degrees
+  public static final double MINSECONDARYBALANCE = -6.5; // Degrees
+  public static final double MAXSECONDARYBALANCE = 6.5; // Degrees
   //** INTAKE ARM */
   // Motors
   public static final int NEO_ROT_RIGHT = 7; // NEO for rotating the intake arm
   public static final int NEO_ROT_LEFT = 8; // NEO for rotating the intake arm
   public static final int NEO_EXT_RIGHT = 9; // NEO for extending the intake arm
   public static final int NEO_EXT_LEFT = 10; // NEO for extending the intake arm
+  // Breakbeam Sensor
+  public static final int BREAKBEAMHIGH = 0; // Breakbeam Sensor High
+  public static final int BREAKBEAMLOW = 1; // Breakbeam Sensor Low
+  // Rotator PID Values
+  public static final double ROTATOR_P = 0.06; // Rotator P Value
+  public static final double ROTATOR_I = 0.0; // Rotator I Value
+  public static final double ROTATOR_D = 0.08; // Rotator D Value
+  public static final double ROTATOR_FF = 0.0; // Rotator F Value
+  public static final double ROTATOR_I_ZONE = 0.5; // Rotator Tolerance
+  // Extender PID Values
+  public static final double EXTENDER_P = 0.06; // Extender P Value
+  public static final double EXTENDER_I = 0.0; // Extender I Value
+  public static final double EXTENDER_D = 0.08; // Extender D Value
+  public static final double EXTENDER_FF = 0.0; // Extender F Value
+  public static final double EXTENDER_I_ZONE = 0.5; // Extender Tolerance
+
   //** OPERATOR CONSTANTS */
   public static class OperatorConstants {
     // Controller Ports

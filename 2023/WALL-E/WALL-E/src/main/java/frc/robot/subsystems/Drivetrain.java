@@ -25,7 +25,7 @@ import frc.robot.Constants;
 public class Drivetrain extends SubsystemBase {
   /* Pneumatics */
   public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.LOWGEAR, Constants.HIGHGEAR); // Shifter Solenoid
-  public static boolean LowGear = false; // Low Gear is true, High Gear is false
+  public static boolean HighGear = false; // High Gear is true, Low Gear is false
   /* Drivetrain */
   // Motors
   private final WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FR_TALONFX); // Front Right TalonFX
@@ -55,9 +55,9 @@ public class Drivetrain extends SubsystemBase {
     setFalconLimit(frontLeft); // Set Falcon Current Limits (Front Left)
     setFalconLimit(backLeft); // Set Falcon Current Limits (Back Left)
     rightMotors.setInverted(true); // Invert Right Motors
-    m_shift.set(Value.kForward); // Set Shifter to Low Gear
+    m_shift.set(Value.kReverse); // Set Shifter to High Gear
     NetworkTableInstance inst = NetworkTableInstance.getDefault(); // Get Network Table Instance
-    NetworkTable table = inst.getTable("Pigeon2"); // Get Pigeon Table
+    NetworkTable table = inst.getTable("DriveData"); // Get LiveData Table
     yawEntry = table.getEntry("Yaw"); // Get Yaw Entry
     pitchEntry = table.getEntry("Pitch"); // Get Pitch Entry
     rollEntry = table.getEntry("Roll"); // Get Roll Entry
@@ -102,7 +102,7 @@ public class Drivetrain extends SubsystemBase {
   // Shift Gears Method
   public void shift() {
     m_shift.toggle();
-    LowGear = !LowGear;
+    HighGear = !HighGear;
   }
   // ARCADE DRIVE
   public void arcadeDrive(double fwd, double rot) {
