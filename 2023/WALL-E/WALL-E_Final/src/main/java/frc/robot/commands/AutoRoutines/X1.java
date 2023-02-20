@@ -15,6 +15,6 @@ public class X1 extends SequentialCommandGroup {
   public X1() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(new AutoBalance());
   }
 }

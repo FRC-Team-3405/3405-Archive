@@ -73,6 +73,18 @@ public final class Constants {
     public static final double EXT_I = 0.0; // Extender I Value
     public static final double EXT_D = 0.08; // Extender D Value
     public static final double EXT_FF = 0.0; // Extender F Value
+    // Rotator Positions
+    public static final double DEF_ROT = 0.0; 
+    public static final double ROT_ONE = 0.0;
+    public static final double ROT_TWO = 2.0;
+    public static final double ROT_THREE = 4.0;
+    public static final double ROT_FOUR = 6.0;
+    // Extender Positions
+    public static final double DEF_EXT = 0.0;
+    public static final double EXT_ONE = 0.0;
+    public static final double EXT_TWO = 10.0;
+    public static final double EXT_THREE = 20.0;
+    public static final double EXT_FOUR = 30.0;
   }
   /**
    * OPERATOR CONSTANTS
