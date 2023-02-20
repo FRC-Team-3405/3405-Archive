@@ -32,7 +32,10 @@ public class ArmControl extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.m_arm.setRotatePosition(ArmControl.rotateTarget); // Set 0 to the current position (TEST)
+    RobotContainer.m_arm.setExtendPosition(ArmControl.extendTarget); // Set 0 to the current position (TEST)
+  }
 
   // Returns true when the command should end.
   @Override
