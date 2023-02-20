@@ -5,7 +5,9 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.ArmCommands.*;
 import frc.robot.commands.AutoRoutines.*;
+import frc.robot.commands.DriveCommands.ArcadeDrive;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -31,13 +33,16 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort); // Driver Controller
-  private final CommandXboxController m_operatorController =
+  public final static CommandXboxController m_operatorController =
       new CommandXboxController(OperatorConstants.kOperatorControllerPort); // Operator Controller
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    // Set Default Commands
+    m_drive.setDefaultCommand(new ArcadeDrive()); // Set Drivetrain to Arcade Drive
+    m_arm.setDefaultCommand(new ArmControl()); // Set Arm to Arm Control
   }
 
   /**
@@ -51,9 +56,14 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Driver Controller Button Bindings
-    m_driverController.rightBumper().onTrue(m_pneumatics.ShiftGears());
+    m_driverController.rightBumper().onTrue(m_pneumatics.ShiftGears()); // Shift the Gears
     // Operator Controller Button Bindings
-    m_operatorController.rightBumper().onTrue(m_pneumatics.ToggleClaw());
+    m_operatorController.rightBumper().onTrue(m_pneumatics.ToggleClaw()); // Toggle the Claw
+    m_operatorController.leftBumper().onTrue(new ArmReset()); // Reset the Arm Position
+    m_operatorController.a().onTrue(new DecrementPosition("rotate")); // Decrement the Arm Position
+    m_operatorController.y().onTrue(new IncrementPosition("rotate")); // Increment the Arm Position
+    m_operatorController.x().onTrue(new DecrementPosition("extend")); // Decrement the Arm Position
+    m_operatorController.b().onTrue(new IncrementPosition("extend")); // Increment the Arm Position
   }
 
   public static void buildAutoTab() {
@@ -78,6 +88,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return m_autoChoice.getSelected();
+    return m_autoChoice.getSelected(); // Return the selected autonomous routine
   }
 }
