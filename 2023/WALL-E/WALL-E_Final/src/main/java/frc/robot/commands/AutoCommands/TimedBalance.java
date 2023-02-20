@@ -4,47 +4,40 @@
 
 package frc.robot.commands.AutoCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class SeekSlope extends CommandBase {
-  private boolean isFinished = false;
-  /** Creates a new DriveForward. */
-  public SeekSlope() {
+public class TimedBalance extends CommandBase {
+  Timer t;
+  /** Creates a new Balance. */
+  public TimedBalance() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_drive); // Add the DriveTrain Subsystem as a requirement
+    addRequirements(RobotContainer.m_drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    t = new Timer();
+    t.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!RobotContainer.m_drive.onSlope()){
-    RobotContainer.m_drive.tankDriveVolts(Constants.AUTONAVSPEED, Constants.AUTONAVSPEED); // Drive forward at 4 volts
-    return;
-    }
-    if (RobotContainer.m_drive.onSlope()){
-      RobotContainer.m_drive.arcadeDrive(0,0);
-      isFinished = true;
-      return;
-    }
+    RobotContainer.m_drive.tankDriveVolts(2,2);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    isFinished = true;
-    RobotContainer.m_drive.tankDriveVolts(0, 0); // Stop the robot when the command ends
+    t.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isFinished;
+    return t.hasElapsed(.45);
   }
 }

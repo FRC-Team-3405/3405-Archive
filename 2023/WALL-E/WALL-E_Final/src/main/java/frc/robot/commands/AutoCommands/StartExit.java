@@ -5,13 +5,13 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.Constants.DC;
 import frc.robot.RobotContainer;
 
-public class SeekSlope extends CommandBase {
+public class StartExit extends CommandBase {
   private boolean isFinished = false;
   /** Creates a new DriveForward. */
-  public SeekSlope() {
+  public StartExit() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_drive); // Add the DriveTrain Subsystem as a requirement
   }
@@ -25,7 +25,7 @@ public class SeekSlope extends CommandBase {
   @Override
   public void execute() {
     if (!RobotContainer.m_drive.onSlope()){
-    RobotContainer.m_drive.tankDriveVolts(Constants.AUTONAVSPEED, Constants.AUTONAVSPEED); // Drive forward at 4 volts
+    RobotContainer.m_drive.tankDriveVolts(-DC.AUTONAVSPEED, -DC.AUTONAVSPEED); // Drive forward at 4 volts
     return;
     }
     if (RobotContainer.m_drive.onSlope()){

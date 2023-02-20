@@ -2,11 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.DrivetrainCommands;
+package frc.robot.commands.DriveCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.*;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.DC;
+import frc.robot.Constants.OperatorConstants;
 
 public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
@@ -22,9 +23,9 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double moveSpeed = -RobotContainer.airflo.getRawAxis(OperatorConstants.XAXIS)*DrivetrainConstants.MAXPOWER; // Limit Move Speed to 80%
-    double rotateSpeed = -RobotContainer.airflo.getRawAxis(OperatorConstants.YAXIS)*DrivetrainConstants.MAXPOWER; // Limit Rotate Speed to 80%
-    RobotContainer.m_drive.arcadeDrive(moveSpeed, rotateSpeed);
+    double moveSpeed = -RobotContainer.m_driverController.getRawAxis(OperatorConstants.DRIVE_XAXIS)*DC.MAXMOVEPOWER;
+    double turnSpeed = -RobotContainer.m_driverController.getRawAxis(OperatorConstants.DRIVE_YAXIS)*DC.MAXTURNPOWER;
+    RobotContainer.m_drive.arcadeDrive(moveSpeed, turnSpeed);
   }
 
   // Called once the command ends or is interrupted.

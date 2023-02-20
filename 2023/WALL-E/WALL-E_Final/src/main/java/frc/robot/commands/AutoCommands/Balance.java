@@ -5,40 +5,45 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.Constants.DC;
 import frc.robot.RobotContainer;
 
-public class SeekSlope extends CommandBase {
-  private boolean isFinished = false;
-  /** Creates a new DriveForward. */
-  public SeekSlope() {
+public class Balance extends CommandBase {
+  boolean isFinished = false;
+  /** Creates a new CheckBalance. */
+  public Balance() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_drive); // Add the DriveTrain Subsystem as a requirement
+    addRequirements(RobotContainer.m_drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!RobotContainer.m_drive.onSlope()){
-    RobotContainer.m_drive.tankDriveVolts(Constants.AUTONAVSPEED, Constants.AUTONAVSPEED); // Drive forward at 4 volts
-    return;
-    }
-    if (RobotContainer.m_drive.onSlope()){
-      RobotContainer.m_drive.arcadeDrive(0,0);
+    if (RobotContainer.m_drive.pitchValue < DC.MINBALANCEPITCH){
+      RobotContainer.m_drive.tankDriveVolts(DC.AUTOBALANCESPEED, DC.AUTOBALANCESPEED); // Drive forward
+      isFinished = false;
+      return;
+      } 
+    if (RobotContainer.m_drive.pitchValue > DC.MINBALANCEPITCH || RobotContainer.m_drive.pitchValue < DC.MAXBALANCEPITCH){
+      RobotContainer.m_drive.tankDriveVolts(0,0);
       isFinished = true;
       return;
-    }
+    } 
+    // else if (RobotContainer.m_drive.pitchVal > Constants.MAXBALANCEPITCH){
+    //   RobotContainer.m_drive.tankDriveVolts(-Constants.AUTOBALANCESPEED, -Constants.AUTOBALANCESPEED); // Drive backward if necessary
+    //   isFinished = false;
+    //   return;
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    isFinished = true;
+    isFinished = false;
     RobotContainer.m_drive.tankDriveVolts(0, 0); // Stop the robot when the command ends
   }
 
