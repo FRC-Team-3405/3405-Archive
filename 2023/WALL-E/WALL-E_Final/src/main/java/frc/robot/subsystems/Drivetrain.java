@@ -30,18 +30,20 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_TalonFX backLeft = new WPI_TalonFX(DC.BL_TALONFX); // Back Left Motor
   private final WPI_TalonFX middleLeft = new WPI_TalonFX(DC.ML_TALONFX); // Middle Left Motor
   // Motor Controller Groups
-  private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight, middleRight);
-  private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft, middleLeft);
+  private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight, middleRight); // Right Motors
+  private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft, middleLeft); // Left Motors
   // Differential Drive
-  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   // Pigeon 2.0 IMU
-  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(DC.P_PIGEON);
+  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(DC.P_PIGEON); // Pigeon 2.0 IMU
   private NetworkTableEntry pitchEntry; // Pitch Entry
   public double pitchValue; // Pitch Value
   // Current Limits (Falcon 500s)
-  void setFalconLimit(WPI_TalonFX falcon)
+  void setFalconLimit(WPI_TalonFX falcon) // Set Current Limit (Falcon 500s)
   {
+    // Supply = 40A (Breaker Limit). Use this to prevent browning.
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
+    // Stator = 90A (Falcon 500 Limit). Use this to prevent Motor Burnout.
     falcon.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 70, 90, 1));
   }
   /** Creates a new Drivetrain. */
