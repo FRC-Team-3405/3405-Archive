@@ -35,6 +35,7 @@ public class ArmControl extends CommandBase {
   public void end(boolean interrupted) {
     RobotContainer.m_arm.setRotatePosition(ArmControl.rotateTarget); // Set 0 to the current position (TEST)
     RobotContainer.m_arm.setExtendPosition(ArmControl.extendTarget); // Set 0 to the current position (TEST)
+    // Note: We could possibly return a 'true' value for an isFinished variable to prevent the arm moving after disabling...
   }
 
   // Returns true when the command should end.
