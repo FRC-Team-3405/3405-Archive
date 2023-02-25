@@ -89,6 +89,10 @@ public final class Constants {
     public static final double EXT_TWO = 10.0;
     public static final double EXT_THREE = 20.0;
     public static final double EXT_FOUR = 30.0;
+    // Auto Positions
+    public static final double AUTO_ROT_POS = 4; // Auto Rotation Position
+    public static final double AUTO_ROT_ADJ_POS = 6; // Auto Rotation Adjustment Position (Post-Scoring)
+    public static final double AUTO_EXT_POS = 10; // Auto Extension Position
   }
   /**
    * OPERATOR CONSTANTS
