@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Pneumatics extends SubsystemBase {
-  private final PneumaticHub pneumaticHub = new PneumaticHub(); // REV Pneumatic Hub
+  private final PneumaticHub ph = new PneumaticHub(); // REV Pneumatic Hub
   // private final Compressor compressor = new Compressor(PneumaticsModuleType.REVPH); // Compressor
   private final DoubleSolenoid shifter = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1); // Shifter Solenoid
   private final DoubleSolenoid claw = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3); // Claw Solenoid
@@ -20,7 +20,7 @@ public class Pneumatics extends SubsystemBase {
   public static boolean ClawOpen = false; // ClawClosed is true, ClawOpen is false (Set to Claw Closed by default)
   /** Creates a new Pneumatics. */
   public Pneumatics() {
-    pneumaticHub.clearStickyFaults();
+    ph.clearStickyFaults();
     shifter.set(DoubleSolenoid.Value.kForward); // Set to High Gear by Default
     claw.set(DoubleSolenoid.Value.kReverse); // Set to Claw Closed by Default
   }

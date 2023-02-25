@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Grease;
 import frc.robot.commands.AutoCommands.*;
 import frc.robot.commands.DrivetrainCommands.*;
 import frc.robot.subsystems.Drivetrain;
@@ -65,6 +66,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // arcadeDrive will run in autonomous
-    return new AutoBalance();
+    return new Grease();
   }
 }

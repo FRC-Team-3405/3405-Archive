@@ -24,21 +24,23 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
   /* Pneumatics */
-  public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.LOWGEAR, Constants.HIGHGEAR);
+  // public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.LOWGEAR, Constants.HIGHGEAR);
   public static boolean HighGear = false; // Low Gear
   /* Drivetrain */
   // Motors
-  private final WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FR_TALONFX); // Front Right Talon FX
-  private final WPI_TalonFX backRight = new WPI_TalonFX(Constants.BR_TALONFX); // Back Right Talon FX
-  private final WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.FL_TALONFX); // Front Left Talon FX
-  private final WPI_TalonFX backLeft = new WPI_TalonFX(Constants.BL_TALONFX); // Back Left Talon FX
+  private final WPI_TalonFX frontRight = new WPI_TalonFX(2); // Front Right Talon FX
+  private final WPI_TalonFX backRight = new WPI_TalonFX(3); // Back Right Talon FX
+  private final WPI_TalonFX middleRight = new WPI_TalonFX(4);
+  private final WPI_TalonFX frontLeft = new WPI_TalonFX(5); // Front Left Talon FX
+  private final WPI_TalonFX backLeft = new WPI_TalonFX(6); // Back Left Talon FX
+  private final WPI_TalonFX middleLeft = new WPI_TalonFX(7);
   // Motor Controller Groups
-  private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight); // Right Motors
-  private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft); // Left Motors
+  private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight, middleRight); // Right Motors
+  private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft, middleLeft); // Left Motors
   // Differential Drive
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   // Pigeon 2.0 IMU
-  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
+  // private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
   private NetworkTableEntry yawEntry;
   private NetworkTableEntry pitchEntry;
   private NetworkTableEntry rollEntry;
@@ -52,10 +54,15 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     setFalconLimit(frontRight); // Set Falcon Current Limits (FR)
     setFalconLimit(backRight); // Set Falcon Current Limits (BR)
+    setFalconLimit(middleRight);
     setFalconLimit(frontLeft); // Set Falcon Current Limits (FL)
     setFalconLimit(backLeft); // Set Falcon Current Limits (BL)
-    rightMotors.setInverted(true); // Invert Right Motors
-    m_shift.set(Value.kReverse); // Set Shifter to High Gear
+    setFalconLimit(middleLeft);
+    // rightMotors.setInverted(true); // Invert Right Motors
+    frontRight.setInverted(true); // Invert the front-right motor
+    backRight.setInverted(true); // Invert the back-right motor
+    middleLeft.setInverted(true);
+    // m_shift.set(Value.kReverse); // Set Shifter to High Gear
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
     yawEntry = table.getEntry("Yaw");
@@ -83,13 +90,13 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    double yaw = m_pigeon.getYaw(); // Get pitch periodically via NetworkTables
-    yawEntry.setDouble(yaw); // Set YAW entry
-    double pitch = m_pigeon.getPitch(); // Get pitch periodically via NetworkTables
-    pitchEntry.setDouble(pitch); // Set PITCH entry
-    double roll = m_pigeon.getRoll(); // Get roll periodically via NetworkTables
-    rollEntry.setDouble(roll); // Set ROLL entry
-    pitchVal = pitch; // Will this periodically update the pitch? Hopefully.
+    // double yaw = m_pigeon.getYaw(); // Get pitch periodically via NetworkTables
+    // yawEntry.setDouble(yaw); // Set YAW entry
+    // double pitch = m_pigeon.getPitch(); // Get pitch periodically via NetworkTables
+    // pitchEntry.setDouble(pitch); // Set PITCH entry
+    // double roll = m_pigeon.getRoll(); // Get roll periodically via NetworkTables
+    // rollEntry.setDouble(roll); // Set ROLL entry
+    // pitchVal = pitch; // Will this periodically update the pitch? Hopefully.
     onSlope();
     if (onSlope() == true) {
       setBrake(NeutralMode.Brake);
@@ -104,7 +111,7 @@ public class Drivetrain extends SubsystemBase {
 
   // Shift Gears
   public void shift() {
-    m_shift.toggle();
+    // m_shift.toggle();
     HighGear = !HighGear;
   }
 

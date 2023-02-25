@@ -43,7 +43,7 @@ public class Drivetrain extends SubsystemBase {
   {
     // Supply = 40A (Breaker Limit). Use this to prevent browning.
     falcon.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 39, 40, 10));
-    // Stator = 90A (Falcon 500 Limit). Use this to prevent Motor Burnout.
+    // Stator = 90A (Falcon 500 Limit is 100A). Use this to prevent Motor Burnout.
     falcon.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 70, 90, 1));
   }
   /** Creates a new Drivetrain. */
@@ -55,7 +55,9 @@ public class Drivetrain extends SubsystemBase {
     setFalconLimit(frontLeft); // Set Current Limit (Front Left Falcon 500)
     setFalconLimit(backLeft); // Set Current Limit (Back Left Falcon 500)
     setFalconLimit(middleLeft); // Set Current Limit (Middle Left Falcon 500)
-    rightMotors.setInverted(true); // Invert Right Motors
+    frontRight.setInverted(true); // Invert Front Right Motor
+    backRight.setInverted(true); // Invert Back Right Motor
+    middleLeft.setInverted(true); // Invert Middle Left Motor
     NetworkTableInstance inst = NetworkTableInstance.getDefault(); // Get Network Table Instance
     NetworkTable table = inst.getTable("DriveData"); // Get DriveData Table
     pitchEntry = table.getEntry("Pitch"); // Get Pitch Entry
