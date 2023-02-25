@@ -9,8 +9,8 @@ import frc.robot.RobotContainer;
 import frc.robot.Constants.AC;
 
 public class ArmControl extends CommandBase {
-  static double rotateTarget = AC.DEF_ROT;
-  static double extendTarget = AC.DEF_EXT;
+  public static double rotateTarget = AC.DEF_ROT;
+  public static double extendTarget = AC.DEF_EXT;
   /** Creates a new ArmControl. */
   public ArmControl() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,15 +26,13 @@ public class ArmControl extends CommandBase {
   public void execute() {
     ArmControl.rotateTarget += RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
     ArmControl.extendTarget += RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
-    RobotContainer.m_arm.setRotatePosition(ArmControl.rotateTarget);
-    RobotContainer.m_arm.setExtendPosition(ArmControl.extendTarget);
+    RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
+    RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_arm.setRotatePosition(ArmControl.rotateTarget); // Set 0 to the current position (TEST)
-    RobotContainer.m_arm.setExtendPosition(ArmControl.extendTarget); // Set 0 to the current position (TEST)
     // Note: We could possibly return a 'true' value for an isFinished variable to prevent the arm moving after disabling...
   }
 

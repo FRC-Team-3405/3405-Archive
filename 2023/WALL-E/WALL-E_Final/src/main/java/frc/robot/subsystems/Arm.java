@@ -69,12 +69,23 @@ public class Arm extends SubsystemBase {
   }
 
   // Set Rotate Position Function
-  public void setRotatePosition(double position) {
+  public void setRotatePIDControl(double position) {
     rotatorPID.setReference(position, ControlType.kPosition); // Set Rotator Position
   }
 
   // Set Extend Position Function
-  public void setExtendPosition(double position) {
+  public void setExtendPIDControl(double position) {
     extenderPID.setReference(position, ControlType.kPosition); // Set Extender Position
+  }
+
+  public void setEncoders(String component, double position) {
+    if (component.equals("rotate")) {
+      leftRotateEncoder.setPosition(position);
+      rightRotateEncoder.setPosition(position);
+    } else if (component.equals("extend")) {
+      leftExtensionEncoder.setPosition(position);
+      rightExtentionEncoder.setPosition(position);
+
+    }
   }
 }

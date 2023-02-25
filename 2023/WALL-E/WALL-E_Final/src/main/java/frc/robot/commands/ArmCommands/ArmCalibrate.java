@@ -6,13 +6,12 @@ package frc.robot.commands.ArmCommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.AC;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ArmReset extends InstantCommand {
-  public ArmReset() {
+public class ArmCalibrate extends InstantCommand {
+  public ArmCalibrate() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_arm);
   }
@@ -20,8 +19,10 @@ public class ArmReset extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ArmControl.rotateTarget = AC.DEF_ROT;
-    ArmControl.extendTarget = AC.DEF_EXT;
-    System.out.println("The arm has been reset.");
+    RobotContainer.m_arm.setEncoders("rotate", 0);
+    ArmControl.rotateTarget = 0;
+    RobotContainer.m_arm.setEncoders("extend", 0);
+    ArmControl.extendTarget = 0;
+    System.out.println("The arm has been zeroed.");
   }
 }
