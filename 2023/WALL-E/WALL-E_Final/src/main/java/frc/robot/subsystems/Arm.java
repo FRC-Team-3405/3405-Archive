@@ -18,8 +18,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Arm extends SubsystemBase {
   // Motors
-  private final CANSparkMax rotator = new CANSparkMax(AC.ROT_LEFT, MotorType.kBrushless);
-  private final CANSparkMax rotatorFollower = new CANSparkMax(AC.ROT_RIGHT, MotorType.kBrushless);
+  private final CANSparkMax rotator = new CANSparkMax(AC.ROT_RIGHT, MotorType.kBrushless);
+  private final CANSparkMax rotatorFollower = new CANSparkMax(AC.ROT_LEFT, MotorType.kBrushless);
   private final CANSparkMax extender = new CANSparkMax(AC.EXT_LEFT, MotorType.kBrushless);
   private final CANSparkMax extenderFollower = new CANSparkMax(AC.EXT_RIGHT, MotorType.kBrushless);
   // Motor Encoder Values (NetworkTableEntry)
@@ -38,13 +38,13 @@ public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   public Arm() {
     // Rotator Setup
-    rotatorFollower.follow(rotator); // Follows the Rotator Motor
+    rotatorFollower.follow(rotator, true); // Follows the Rotator Motor
     rotatorPID.setP(AC.ROT_P); // Rotator P Value
     rotatorPID.setI(AC.ROT_I); // Rotator I Value
     rotatorPID.setD(AC.ROT_D); // Rotator D Value
     rotatorPID.setFF(AC.ROT_FF); // Rotator FeedForward Value
     // Extender Setup
-    extenderFollower.follow(extender); // Follows the Extender Motor
+    extenderFollower.follow(extender, true); // Follows the Extender Motor
     extenderPID.setP(AC.EXT_P); // Extender P Value
     extenderPID.setI(AC.EXT_I); // Extender I Value
     extenderPID.setD(AC.EXT_D); // Extender D Value

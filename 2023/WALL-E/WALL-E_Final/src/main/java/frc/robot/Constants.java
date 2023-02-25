@@ -56,8 +56,8 @@ public final class Constants {
    */
   public static class AC {
     // CAN BUS IDs
-    public static final int ROT_RIGHT = 9;
-    public static final int ROT_LEFT = 10;
+    public static final int ROT_RIGHT = 10;
+    public static final int ROT_LEFT = 9;
     public static final int EXT_RIGHT = 11;
     public static final int EXT_LEFT = 12;
     // Breakbeam Sensor IDs
