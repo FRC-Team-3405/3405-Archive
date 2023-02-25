@@ -15,6 +15,6 @@ public class B3 extends SequentialCommandGroup {
   public B3() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(new AutoArmScoring(), new ExitCommunity(3));
   }
 }

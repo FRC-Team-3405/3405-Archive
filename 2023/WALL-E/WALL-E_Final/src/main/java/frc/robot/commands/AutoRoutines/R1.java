@@ -15,6 +15,6 @@ public class R1 extends SequentialCommandGroup {
   public R1() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(new AutoArmScoring(), new ExitCommunity(2));
   }
 }
