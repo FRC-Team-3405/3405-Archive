@@ -64,9 +64,9 @@ public final class Constants {
     public static final int BREAKBEAM_LEFT = 0;
     public static final int BREAKBEAM_RIGHT = 1;
     // Rotator Performance Values
-    public static final double ROT_POWER = 0.1; // Rotator Power (Percent)
+    public static final double ROT_POWER = 0.3; // Rotator Power (Percent)
     // Extender Performance Values
-    public static final double EXT_POWER = 0.1; // Extender Power (Percent)
+    public static final double EXT_POWER = 0.5; // Extender Power (Percent)
     // Rotator PID Values
     public static final double ROT_P = 0.06; // Rotator P Value
     public static final double ROT_I = 0.0; // Rotator I Value

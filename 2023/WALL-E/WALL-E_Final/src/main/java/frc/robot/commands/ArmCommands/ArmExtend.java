@@ -5,14 +5,12 @@
 package frc.robot.commands.ArmCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.AC;
 
-public class ArmControl extends CommandBase {
-  public static double rotateTarget = AC.DEF_ROT;
-  public static double extendTarget = AC.DEF_EXT;
-  /** Creates a new ArmControl. */
-  public ArmControl() {
+public class ArmExtend extends CommandBase {
+  /** Creates a new ArmExtend. */
+  public ArmExtend() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_arm);
   }
@@ -24,16 +22,18 @@ public class ArmControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ArmControl.rotateTarget += RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
-    //ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
-    RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
-    //RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
+    if (RobotContainer.m_arm.leftExtensionEncoder.getPosition() > -44.0) {
+      RobotContainer.m_arm.setSpeed(0.2);
+    }
+    else{
+      RobotContainer.m_arm.setSpeed(-0.1);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // Note: We could possibly return a 'true' value for an isFinished variable to prevent the arm moving after disabling...
+    RobotContainer.m_arm.setSpeed(0.0);
   }
 
   // Returns true when the command should end.

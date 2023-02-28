@@ -60,10 +60,13 @@ public class RobotContainer {
     // Operator Controller Button Bindings
     m_operatorController.rightBumper().onTrue(m_pneumatics.ToggleClaw()); // Toggle the Claw
     m_operatorController.leftBumper().onTrue(new ArmReset()); // Reset the Arm Position
-    m_operatorController.a().onTrue(new DecrementPosition("rotate")); // Decrement the Arm Position
-    m_operatorController.y().onTrue(new IncrementPosition("rotate")); // Increment the Arm Position
-    m_operatorController.x().onTrue(new DecrementPosition("extend")); // Decrement the Arm Position
-    m_operatorController.b().onTrue(new IncrementPosition("extend")); // Increment the Arm Position
+    // m_operatorController.a().onTrue(new DecrementPosition("rotate")); // Decrement the Arm Position
+    // m_operatorController.y().onTrue(new IncrementPosition("rotate")); // Increment the Arm Position
+    // m_operatorController.x().onTrue(new DecrementPosition("extend")); // Decrement the Arm Position
+    // m_operatorController.b().onTrue(new IncrementPosition("extend")); // Increment the Arm Position
+    m_operatorController.button(8).onTrue(new ArmCR()); // Set the 0?
+    m_operatorController.a().whileTrue(new ArmExtend());
+    m_operatorController.b().whileTrue(new ArmRetract());
   }
 
   public static void buildAutoTab() {

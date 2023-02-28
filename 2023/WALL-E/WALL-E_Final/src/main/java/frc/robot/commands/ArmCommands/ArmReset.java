@@ -20,6 +20,8 @@ public class ArmReset extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println(ArmControl.rotateTarget);
+    System.out.println(ArmControl.extendTarget);
     ArmControl.rotateTarget = AC.DEF_ROT;
     ArmControl.extendTarget = AC.DEF_EXT;
     System.out.println("The arm has been reset.");
