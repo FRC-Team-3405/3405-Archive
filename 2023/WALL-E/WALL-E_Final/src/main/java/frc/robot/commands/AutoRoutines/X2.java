@@ -15,6 +15,6 @@ public class X2 extends SequentialCommandGroup {
   public X2() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(new TimeSpace()); // Fix if you want this to not sit there for .35 seconds and not move!!
   }
 }
