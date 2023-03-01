@@ -65,8 +65,6 @@ public class RobotContainer {
     // m_operatorController.x().onTrue(new DecrementPosition("extend")); // Decrement the Arm Position
     // m_operatorController.b().onTrue(new IncrementPosition("extend")); // Increment the Arm Position
     m_operatorController.button(8).onTrue(new ArmCR()); // Set the 0?
-    m_operatorController.a().whileTrue(new ArmExtend());
-    m_operatorController.b().whileTrue(new ArmRetract());
   }
 
   public static void buildAutoTab() {
