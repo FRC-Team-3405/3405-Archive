@@ -14,7 +14,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Arm extends SubsystemBase {
@@ -31,18 +30,13 @@ public class Arm extends SubsystemBase {
   // Motor Encoder Values (Raw Value)
   RelativeEncoder leftRotateEncoder = rotator.getEncoder();
   RelativeEncoder rightRotateEncoder = rotatorFollower.getEncoder();
-  public RelativeEncoder leftExtensionEncoder = extender.getEncoder();
+  RelativeEncoder leftExtensionEncoder = extender.getEncoder();
   RelativeEncoder rightExtentionEncoder = extenderFollower.getEncoder();
   // PID Controllers
   SparkMaxPIDController rotatorPID = rotator.getPIDController();
-  // SparkMaxPIDController extenderPID = extender.getPIDController();
+  SparkMaxPIDController extenderPID = extender.getPIDController();
   /** Creates a new Arm. */
   public Arm() {
-    // Clear Sticky Faults
-    rotator.clearFaults();
-    rotatorFollower.clearFaults();
-    extender.clearFaults();
-    extenderFollower.clearFaults();
     // Rotator Setup
     rotatorFollower.follow(rotator, true); // Follows the Rotator Motor
     rotatorPID.setP(AC.ROT_P); // Rotator P Value
@@ -51,12 +45,10 @@ public class Arm extends SubsystemBase {
     rotatorPID.setFF(AC.ROT_FF); // Rotator FeedForward Value
     // Extender Setup
     extenderFollower.follow(extender, true); // Follows the Extender Motor
-    extender.setIdleMode(IdleMode.kBrake);
-    extenderFollower.setIdleMode(IdleMode.kBrake);
-    // extenderPID.setP(AC.EXT_P); // Extender P Value
-    // extenderPID.setI(AC.EXT_I); // Extender I Value
-    // extenderPID.setD(AC.EXT_D); // Extender D Value
-    // extenderPID.setFF(AC.EXT_FF); // Extender FeedForward Value
+    extenderPID.setP(AC.EXT_P); // Extender P Value
+    extenderPID.setI(AC.EXT_I); // Extender I Value
+    extenderPID.setD(AC.EXT_D); // Extender D Value
+    extenderPID.setFF(AC.EXT_FF); // Extender FeedForward Value
     // NetworkTable Setup
     NetworkTableInstance inst = NetworkTableInstance.getDefault(); // Get Default NetworkTable Instance
     NetworkTable table = inst.getTable("Arm"); // Get Arm Table
@@ -75,9 +67,6 @@ public class Arm extends SubsystemBase {
     leftRotation.setDouble(leftRotateEncoder.getPosition()); // Set Left Rotation Value
     rightRotation.setDouble(rightRotateEncoder.getPosition());  // Set Right Rotation Value
   }
-  public void initialize(){
-    setEncoders("extend",0.0);
-  }
 
   // Set Rotate Position Function
   public void setRotatePIDControl(double position) {
@@ -86,22 +75,17 @@ public class Arm extends SubsystemBase {
 
   // Set Extend Position Function
   public void setExtendPIDControl(double position) {
-    //extenderPID.setReference(position, ControlType.kPosition); // Set Extender Position
+    extenderPID.setReference(position, ControlType.kPosition); // Set Extender Position
   }
 
   public void setEncoders(String component, double position) {
-    System.out.println("Position: "+ position);
     if (component.equals("rotate")) {
       leftRotateEncoder.setPosition(position);
       rightRotateEncoder.setPosition(position);
     } else if (component.equals("extend")) {
       leftExtensionEncoder.setPosition(position);
       rightExtentionEncoder.setPosition(position);
+
     }
-    System.out.println("Position After Set:" + position); // Add 2/27/2023
-  }
-  public void setSpeed(double speed){ // Add 2/27/2023
-    extender.set(speed);
-    extenderFollower.set(speed);
   }
 }

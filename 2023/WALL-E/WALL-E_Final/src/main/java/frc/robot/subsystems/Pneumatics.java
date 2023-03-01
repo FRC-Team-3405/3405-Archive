@@ -22,7 +22,7 @@ public class Pneumatics extends SubsystemBase {
   public Pneumatics() {
     ph.clearStickyFaults();
     shifter.set(DoubleSolenoid.Value.kForward); // Set to High Gear by Default
-    claw.set(DoubleSolenoid.Value.kForward); // Set to Claw Closed by Default
+    claw.set(DoubleSolenoid.Value.kReverse); // Set to Claw Closed by Default
   }
   // Shifts to Low or High gear
   public CommandBase ShiftGears() {
