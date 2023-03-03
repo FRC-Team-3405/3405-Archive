@@ -29,7 +29,7 @@ public class ExitCommunity extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(-2, -2);
+    RobotContainer.m_drive.tankDriveVolts(-1, -1);
   }
 
   // Called once the command ends or is interrupted.

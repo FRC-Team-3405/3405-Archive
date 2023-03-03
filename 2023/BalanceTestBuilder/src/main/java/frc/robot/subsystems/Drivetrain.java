@@ -40,7 +40,7 @@ public class Drivetrain extends SubsystemBase {
   // Differential Drive
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   // Pigeon 2.0 IMU
-  // private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
+  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon 2.0
   private NetworkTableEntry yawEntry;
   private NetworkTableEntry pitchEntry;
   private NetworkTableEntry rollEntry;

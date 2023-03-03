@@ -7,7 +7,6 @@ package frc.robot.commands.ArmCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.AC;
-
 public class ArmControl extends CommandBase {
   public static double rotateTarget = AC.DEF_ROT;
   public static double extendTarget = AC.DEF_EXT;
@@ -24,10 +23,10 @@ public class ArmControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ArmControl.rotateTarget += RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
-    //ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
-    RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
-    //RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
+    ArmControl.rotateTarget += -RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
+    ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
+    // RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
+    // RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
   }
 
   // Called once the command ends or is interrupted.

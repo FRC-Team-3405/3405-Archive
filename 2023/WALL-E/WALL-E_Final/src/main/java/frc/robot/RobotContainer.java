@@ -60,17 +60,17 @@ public class RobotContainer {
     // Operator Controller Button Bindings
     m_operatorController.rightBumper().onTrue(m_pneumatics.ToggleClaw()); // Toggle the Claw
     m_operatorController.leftBumper().onTrue(new ArmReset()); // Reset the Arm Position
-    // m_operatorController.a().onTrue(new DecrementPosition("rotate")); // Decrement the Arm Position
-    // m_operatorController.y().onTrue(new IncrementPosition("rotate")); // Increment the Arm Position
-    // m_operatorController.x().onTrue(new DecrementPosition("extend")); // Decrement the Arm Position
-    // m_operatorController.b().onTrue(new IncrementPosition("extend")); // Increment the Arm Position
+    m_operatorController.a().onTrue(new DecrementPosition("rotate")); // Decrement the Arm Rotation
+    m_operatorController.y().onTrue(new IncrementPosition("rotate")); // Increment the Arm Rotation
+    m_operatorController.x().onTrue(new DecrementPosition("extend")); // Decrement the Arm Extension
+    m_operatorController.b().onTrue(new IncrementPosition("extend")); // Increment the Arm Extension
     m_operatorController.button(8).onTrue(new ArmCR()); // Set the 0?
   }
 
   public static void buildAutoTab() {
     ShuffleboardTab autoTab = Shuffleboard.getTab("Auto");
     m_autoChoice = new SendableChooser<Command>();
-    m_autoChoice.setDefaultOption("Custom 1", new X1()); // Custom Sequence 1 (From Auto Routines)
+    m_autoChoice.setDefaultOption("Custom 2", new X2()); // Custom Sequence 1 (From Auto Routines)
     m_autoChoice.addOption("Custom 1", new X1()); // Custom Sequence 1 (From Auto Routines)
     m_autoChoice.addOption("Custom 2", new X2()); // Custom Sequence 2 (From Auto Routines)
     m_autoChoice.addOption("Blue 1", new B1()); // Blue 1 (From Auto Routines)

@@ -38,6 +38,6 @@ public class AutoScoreBackUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return t.hasElapsed(.45);
+    return t.hasElapsed(.25);
   }
 }

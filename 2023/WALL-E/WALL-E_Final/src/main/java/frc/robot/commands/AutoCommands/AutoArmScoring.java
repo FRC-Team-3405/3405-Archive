@@ -16,6 +16,6 @@ public class AutoArmScoring extends SequentialCommandGroup {
   public AutoArmScoring() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoArmRotate(AC.AUTO_ROT_POS), new AutoArmExtend(AC.AUTO_EXT_POS), RobotContainer.m_pneumatics.ToggleClaw(), new AutoArmRotate(AC.AUTO_ROT_ADJ_POS), new AutoScoreBackUp(), RobotContainer.m_pneumatics.ToggleClaw(), new AutoArmReset());
+    addCommands(new AutoArmRotate(AC.AUTO_ROT_POS), new AutoArmExtend(AC.AUTO_EXT_POS), RobotContainer.m_pneumatics.ToggleClaw(), new AutoArmRotate(AC.AUTO_ROT_ADJ_POS), new AutoScoreBackUp(), RobotContainer.m_pneumatics.ToggleClaw());
   }
 }

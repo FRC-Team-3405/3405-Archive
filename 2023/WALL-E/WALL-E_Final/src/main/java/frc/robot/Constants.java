@@ -18,19 +18,19 @@ public final class Constants {
    */
   public static class DC {
     // CAN IDs
-    public static final int FR_TALONFX = 2; // Front Right Falcon500
-    public static final int BR_TALONFX = 3; // Back Right Falcon500
-    public static final int MR_TALONFX = 4; // Middle Right Falcon500
-    public static final int FL_TALONFX = 5; // Front Left Falcon500
-    public static final int BL_TALONFX = 6; // Back Left Falcon500
-    public static final int ML_TALONFX = 7; // Middle Left Falcon500
+    public static final int FR_TALONFX = 5; // Front Right Falcon500
+    public static final int BR_TALONFX = 6; // Back Right Falcon500
+    public static final int MR_TALONFX = 7; // Middle Right Falcon500
+    public static final int FL_TALONFX = 2; // Front Left Falcon500
+    public static final int BL_TALONFX = 3; // Back Left Falcon500
+    public static final int ML_TALONFX = 4; // Middle Left Falcon500
     public static final int P_PIGEON = 8; // Pigeon 2.0 IMU
     // Motor Performance Values
     public static final double MAXMOVEPOWER = 0.8; // Maximum Fwd/Back Power (Percent)
     public static final double MAXTURNPOWER = 0.6; // Maximum Rotating Power (Percent)
-    public static final double AUTONAVSPEED = 3.5; // Maximum Moving Power (AUTO Flat Ground, VOLTS)
-    public static final double AUTOBALANCESPEED = 2.0; // Maximum Moving Power (AUTO Slope, VOLTS)
-    public static final double SECONDARYBALANCESPEED = 1.5; // Maximum Moving Power (AUTO Slope, VOLTS)
+    public static final double AUTONAVSPEED = 0.25; // Maximum Moving Power (AUTO Flat Ground, VOLTS)
+    public static final double AUTOBALANCESPEED = 0.25; // Maximum Moving Power (AUTO Slope, VOLTS)
+    public static final double SECONDARYBALANCESPEED = 0.15; // Maximum Moving Power (AUTO Slope, VOLTS)
     // Pigeon 2.0 Performance Variables
     public static final double MINSEEKPITCH = -7.0; // Minimum Pitch (Degrees, Seeking the Slope)
     public static final double MAXSEEKPITCH = 7.0; // Maximum Pitch (Degrees, Seeking the Slope)

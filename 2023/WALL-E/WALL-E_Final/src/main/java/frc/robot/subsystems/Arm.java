@@ -14,6 +14,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Arm extends SubsystemBase {
@@ -28,8 +29,8 @@ public class Arm extends SubsystemBase {
   private NetworkTableEntry leftRotation;
   private NetworkTableEntry rightRotation;
   // Motor Encoder Values (Raw Value)
-  RelativeEncoder leftRotateEncoder = rotator.getEncoder();
-  RelativeEncoder rightRotateEncoder = rotatorFollower.getEncoder();
+  RelativeEncoder leftRotateEncoder = rotatorFollower.getEncoder();
+  RelativeEncoder rightRotateEncoder = rotator.getEncoder();
   RelativeEncoder leftExtensionEncoder = extender.getEncoder();
   RelativeEncoder rightExtentionEncoder = extenderFollower.getEncoder();
   // PID Controllers
@@ -44,6 +45,8 @@ public class Arm extends SubsystemBase {
     rotatorPID.setD(AC.ROT_D); // Rotator D Value
     rotatorPID.setFF(AC.ROT_FF); // Rotator FeedForward Value
     // Extender Setup
+    extender.setIdleMode(IdleMode.kBrake);
+    extenderFollower.setIdleMode(IdleMode.kBrake);
     extenderFollower.follow(extender, true); // Follows the Extender Motor
     extenderPID.setP(AC.EXT_P); // Extender P Value
     extenderPID.setI(AC.EXT_I); // Extender I Value

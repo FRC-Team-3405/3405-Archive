@@ -26,7 +26,7 @@ public class CrossChargeStation extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(-4,-4);
+    RobotContainer.m_drive.tankDriveVolts(-2,-2);
   }
 
   // Called once the command ends or is interrupted.
