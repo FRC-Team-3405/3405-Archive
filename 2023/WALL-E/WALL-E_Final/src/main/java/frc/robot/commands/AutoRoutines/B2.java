@@ -15,6 +15,6 @@ public class B2 extends SequentialCommandGroup {
   public B2() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoArmScoring(), new StartExit(), new CrossChargeStation(), new AutoBalance());
+    addCommands(new StartExit(), new CrossChargeStation(), new AutoBalance());
   }
 }

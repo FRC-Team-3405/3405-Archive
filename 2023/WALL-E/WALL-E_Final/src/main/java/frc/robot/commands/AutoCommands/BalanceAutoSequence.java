@@ -15,6 +15,6 @@ public class BalanceAutoSequence extends SequentialCommandGroup {
   public BalanceAutoSequence() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoArmMoveReset(), RobotContainer.m_pneumatics.ShiftGears(), new CrossChargeStation(), RobotContainer.m_pneumatics.ShiftGears(), new AutoBalance());
+    addCommands(RobotContainer.m_pneumatics.ShiftGears(), new CrossChargeStation(), RobotContainer.m_pneumatics.ShiftGears(), new AutoBalance());
   }
 }

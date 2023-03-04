@@ -6,6 +6,13 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmCommands.*;
+import frc.robot.commands.AutoCommands.AutoBalance;
+import frc.robot.commands.AutoCommands.BeginBalance;
+import frc.robot.commands.AutoCommands.ExitCommunity;
+import frc.robot.commands.AutoCommands.LongAuto;
+import frc.robot.commands.AutoCommands.ShortAuto;
+import frc.robot.commands.AutoCommands.TimeSpace;
+import frc.robot.commands.AutoCommands.TimedBalance;
 import frc.robot.commands.AutoRoutines.*;
 import frc.robot.commands.DriveCommands.ArcadeDrive;
 import frc.robot.subsystems.*;
@@ -70,15 +77,18 @@ public class RobotContainer {
   public static void buildAutoTab() {
     ShuffleboardTab autoTab = Shuffleboard.getTab("Auto");
     m_autoChoice = new SendableChooser<Command>();
-    m_autoChoice.setDefaultOption("Custom 2", new X2()); // Custom Sequence 1 (From Auto Routines)
-    m_autoChoice.addOption("Custom 1", new X1()); // Custom Sequence 1 (From Auto Routines)
-    m_autoChoice.addOption("Custom 2", new X2()); // Custom Sequence 2 (From Auto Routines)
-    m_autoChoice.addOption("Blue 1", new B1()); // Blue 1 (From Auto Routines)
-    m_autoChoice.addOption("Blue 2", new B2()); // Blue 2 (From Auto Routines)
-    m_autoChoice.addOption("Blue 3", new B3()); // Blue 3 (From Auto Routines)
-    m_autoChoice.addOption("Red 1", new R1()); // Red 1 (From Auto Routines)
-    m_autoChoice.addOption("Red 2", new R2()); // Red 2 (From Auto Routines)
-    m_autoChoice.addOption("Red 3", new R3()); // Red 3 (From Auto Routines)
+    m_autoChoice.setDefaultOption("Long Auto", new LongAuto()); // Custom Sequence 1 (From Auto Routines)
+    // m_autoChoice.addOption("Custom 1", new X1()); // Custom Sequence 1 (From Auto Routines)
+    // m_autoChoice.addOption("Custom 2", new X2()); // Custom Sequence 2 (From Auto Routines)
+    // m_autoChoice.addOption("Blue 1", new B1()); // Blue 1 (From Auto Routines)
+    // m_autoChoice.addOption("Blue 2", new B2()); // Blue 2 (From Auto Routines)
+    // m_autoChoice.addOption("Blue 3", new B3()); // Blue 3 (From Auto Routines)
+    // m_autoChoice.addOption("Red 1", new R1()); // Red 1 (From Auto Routines)
+    // m_autoChoice.addOption("Red 2", new R2()); // Red 2 (From Auto Routines)
+    // m_autoChoice.addOption("Red 3", new R3()); // Red 3 (From Auto Routines)
+    m_autoChoice.addOption("Short Auto", new ShortAuto());
+    m_autoChoice.addOption("LongAuto", new LongAuto());
+    m_autoChoice.addOption("BalanceAuto", new AutoBalance());
     autoTab.add("Auto Chooser", m_autoChoice).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2, 1);
   }
 

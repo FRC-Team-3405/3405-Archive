@@ -68,7 +68,8 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     double pitch = m_pigeon.getPitch(); // Get Pitch
-    pitchEntry.setDouble(pitch); // Set Pitch
+    pitchEntry.setDouble(pitch); // Set Pitch Network Table
+    pitchValue = pitch;
     onSlope();
     if (onSlope() == true) {
       setBrake(NeutralMode.Brake);

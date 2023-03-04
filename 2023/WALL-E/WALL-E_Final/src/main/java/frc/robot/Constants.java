@@ -28,9 +28,9 @@ public final class Constants {
     // Motor Performance Values
     public static final double MAXMOVEPOWER = 0.8; // Maximum Fwd/Back Power (Percent)
     public static final double MAXTURNPOWER = 0.6; // Maximum Rotating Power (Percent)
-    public static final double AUTONAVSPEED = 0.25; // Maximum Moving Power (AUTO Flat Ground, VOLTS)
-    public static final double AUTOBALANCESPEED = 0.25; // Maximum Moving Power (AUTO Slope, VOLTS)
-    public static final double SECONDARYBALANCESPEED = 0.15; // Maximum Moving Power (AUTO Slope, VOLTS)
+    public static final double AUTONAVSPEED = 2.0; // Maximum Moving Power (AUTO Flat Ground, VOLTS)
+    public static final double AUTOBALANCESPEED = 0.5; // Maximum Moving Power (AUTO Slope, VOLTS)
+    public static final double SECONDARYBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
     // Pigeon 2.0 Performance Variables
     public static final double MINSEEKPITCH = -7.0; // Minimum Pitch (Degrees, Seeking the Slope)
     public static final double MAXSEEKPITCH = 7.0; // Maximum Pitch (Degrees, Seeking the Slope)
@@ -64,7 +64,7 @@ public final class Constants {
     public static final int BREAKBEAM_LEFT = 0;
     public static final int BREAKBEAM_RIGHT = 1;
     // Rotator Performance Values
-    public static final double ROT_POWER = 0.3; // Rotator Power (Percent)
+    public static final double ROT_POWER = 0.25; // Rotator Power (Percent)
     // Extender Performance Values
     public static final double EXT_POWER = 0.5; // Extender Power (Percent)
     // Rotator PID Values

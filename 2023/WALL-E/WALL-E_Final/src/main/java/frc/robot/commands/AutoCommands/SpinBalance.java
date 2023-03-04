@@ -26,7 +26,7 @@ public class SpinBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(1,-1);
+    RobotContainer.m_drive.tankDriveVolts(0.5,-0.5);
   }
 
   // Called once the command ends or is interrupted.

@@ -26,6 +26,7 @@ public class BeginBalance extends CommandBase {
   public void execute() {
     if (!RobotContainer.m_drive.onSlope()){
     RobotContainer.m_drive.tankDriveVolts(DC.AUTONAVSPEED, DC.AUTONAVSPEED); // Drive forward at 4 volts
+    // RobotContainer.m_drive.tankDriveVolts(0.5, 0.5);
     return;
     }
     if (RobotContainer.m_drive.onSlope()){

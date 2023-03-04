@@ -25,8 +25,8 @@ public class ArmControl extends CommandBase {
   public void execute() {
     ArmControl.rotateTarget += -RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
     ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
-    // RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
-    // RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
+    RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
+    RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
   }
 
   // Called once the command ends or is interrupted.

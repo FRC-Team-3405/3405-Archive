@@ -8,15 +8,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ExitCommunity extends CommandBase {
-  double time;
+public class LongAuto extends CommandBase {
   Timer t;
-  
-  /** Creates a new ExitCommunity. */
-  public ExitCommunity(double time) {
+  /** Creates a new Balance. */
+  public LongAuto() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_drive);
-    this.time = time;
   }
 
   // Called when the command is initially scheduled.
@@ -29,18 +26,18 @@ public class ExitCommunity extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(-0.85, -0.85);
+    RobotContainer.m_drive.tankDriveVolts(-0.7,-0.7);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_drive.tankDriveVolts(0, 0);
+    t.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return t.hasElapsed(time);
+    return t.hasElapsed(1.0);
   }
 }
