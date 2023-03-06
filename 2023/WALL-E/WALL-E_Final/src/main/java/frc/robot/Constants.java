@@ -28,7 +28,7 @@ public final class Constants {
     // Motor Performance Values
     public static final double MAXMOVEPOWER = 0.8; // Maximum Fwd/Back Power (Percent)
     public static final double MAXTURNPOWER = 0.6; // Maximum Rotating Power (Percent)
-    public static final double AUTONAVSPEED = 0.65; // Maximum Moving Power (AUTO Flat Ground, VOLTS)
+    public static final double AUTONAVSPEED = 0.65; // Maximum Moving Power (AUTO Flat Ground moving to Station, VOLTS)
     public static final double AUTOBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
     public static final double SECONDARYBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
     // Pigeon 2.0 Performance Variables

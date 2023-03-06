@@ -6,14 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmCommands.*;
-import frc.robot.commands.AutoCommands.AutoBalance;
-import frc.robot.commands.AutoCommands.BeginBalance;
-import frc.robot.commands.AutoCommands.ExitCommunity;
+import frc.robot.commands.AutoCommands.*;
 import frc.robot.commands.AutoCommands.LongAuto;
 import frc.robot.commands.AutoCommands.LowGearSpinTest;
 import frc.robot.commands.AutoCommands.ShortAuto;
-import frc.robot.commands.AutoCommands.TimeSpace;
-import frc.robot.commands.AutoCommands.TimedBalance;
 import frc.robot.commands.AutoRoutines.*;
 import frc.robot.commands.DriveCommands.ArcadeDrive;
 import frc.robot.subsystems.*;
