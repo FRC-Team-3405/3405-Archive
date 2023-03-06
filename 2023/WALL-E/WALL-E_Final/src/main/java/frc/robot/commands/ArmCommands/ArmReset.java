@@ -4,26 +4,16 @@
 
 package frc.robot.commands.ArmCommands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.RobotContainer;
-import frc.robot.Constants.AC;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ArmReset extends InstantCommand {
+public class ArmReset extends SequentialCommandGroup {
+  /** Creates a new ArmReset. */
   public ArmReset() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_arm);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    System.out.println(ArmControl.rotateTarget);
-    System.out.println(ArmControl.extendTarget);
-    ArmControl.rotateTarget = AC.DEF_ROT;
-    ArmControl.extendTarget = AC.DEF_EXT;
-    System.out.println("The arm has been reset.");
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new ArmExtendReset(), new ArmRotateReset());
   }
 }

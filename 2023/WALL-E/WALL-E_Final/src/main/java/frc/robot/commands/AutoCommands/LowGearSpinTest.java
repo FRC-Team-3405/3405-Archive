@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class TimedBalance extends CommandBase {
+public class LowGearSpinTest extends CommandBase {
   Timer t;
   /** Creates a new Balance. */
-  public TimedBalance() {
+  public LowGearSpinTest() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_drive);
   }
@@ -26,7 +26,7 @@ public class TimedBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(0.3,0.3);
+    RobotContainer.m_drive.tankDriveVolts(0.5,0.5);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,6 +38,6 @@ public class TimedBalance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return t.hasElapsed(0.14);
+    return t.hasElapsed(10);
   }
 }

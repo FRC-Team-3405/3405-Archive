@@ -2,42 +2,34 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.AutoCommands;
+package frc.robot.commands.ArmCommands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class TimedBalance extends CommandBase {
-  Timer t;
-  /** Creates a new Balance. */
-  public TimedBalance() {
+public class ArmRotateReset extends CommandBase {
+  /** Creates a new ArmRotateReset. */
+  public ArmRotateReset() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    t = new Timer();
-    t.start();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drive.tankDriveVolts(0.3,0.3);
+    ArmControl.rotateTarget = 0;
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    t.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return t.hasElapsed(0.14);
+    return (RobotContainer.m_arm.leftRotateEncoder.getPosition() + RobotContainer.m_arm.rightRotateEncoder.getPosition()) / 2 < 0.3;
   }
 }

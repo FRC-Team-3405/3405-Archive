@@ -23,7 +23,10 @@ public class ArmControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ArmControl.rotateTarget += -RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
+    if (ArmControl.rotateTarget - RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER > -0.5 &&
+        ArmControl.rotateTarget - RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER < 12.5) {
+      ArmControl.rotateTarget += -RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
+    }
     ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
     RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
     RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);

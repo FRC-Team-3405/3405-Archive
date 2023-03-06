@@ -29,10 +29,10 @@ public class Arm extends SubsystemBase {
   private NetworkTableEntry leftRotation;
   private NetworkTableEntry rightRotation;
   // Motor Encoder Values (Raw Value)
-  RelativeEncoder leftRotateEncoder = rotatorFollower.getEncoder();
-  RelativeEncoder rightRotateEncoder = rotator.getEncoder();
-  RelativeEncoder leftExtensionEncoder = extender.getEncoder();
-  RelativeEncoder rightExtentionEncoder = extenderFollower.getEncoder();
+  public final RelativeEncoder leftRotateEncoder = rotatorFollower.getEncoder();
+  public final RelativeEncoder rightRotateEncoder = rotator.getEncoder();
+  public final RelativeEncoder leftExtensionEncoder = extender.getEncoder();
+  public final RelativeEncoder rightExtensionEncoder = extenderFollower.getEncoder();
   // PID Controllers
   SparkMaxPIDController rotatorPID = rotator.getPIDController();
   SparkMaxPIDController extenderPID = extender.getPIDController();
@@ -66,7 +66,7 @@ public class Arm extends SubsystemBase {
     // This method will be called once per scheduler run
     // Update NetworkTable Values
     leftExtension.setDouble(leftExtensionEncoder.getPosition()); // Set Left Extension Value
-    rightExtension.setDouble(rightExtentionEncoder.getPosition()); // Set Right Extension Value
+    rightExtension.setDouble(rightExtensionEncoder.getPosition()); // Set Right Extension Value
     leftRotation.setDouble(leftRotateEncoder.getPosition()); // Set Left Rotation Value
     rightRotation.setDouble(rightRotateEncoder.getPosition());  // Set Right Rotation Value
   }
@@ -87,7 +87,7 @@ public class Arm extends SubsystemBase {
       rightRotateEncoder.setPosition(position);
     } else if (component.equals("extend")) {
       leftExtensionEncoder.setPosition(position);
-      rightExtentionEncoder.setPosition(position);
+      rightExtensionEncoder.setPosition(position);
 
     }
   }

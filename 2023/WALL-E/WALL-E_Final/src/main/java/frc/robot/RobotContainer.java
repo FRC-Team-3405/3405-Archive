@@ -10,6 +10,7 @@ import frc.robot.commands.AutoCommands.AutoBalance;
 import frc.robot.commands.AutoCommands.BeginBalance;
 import frc.robot.commands.AutoCommands.ExitCommunity;
 import frc.robot.commands.AutoCommands.LongAuto;
+import frc.robot.commands.AutoCommands.LowGearSpinTest;
 import frc.robot.commands.AutoCommands.ShortAuto;
 import frc.robot.commands.AutoCommands.TimeSpace;
 import frc.robot.commands.AutoCommands.TimedBalance;
@@ -89,6 +90,7 @@ public class RobotContainer {
     m_autoChoice.addOption("Short Auto", new ShortAuto());
     m_autoChoice.addOption("LongAuto", new LongAuto());
     m_autoChoice.addOption("BalanceAuto", new AutoBalance());
+    m_autoChoice.addOption("Test", new LowGearSpinTest());
     autoTab.add("Auto Chooser", m_autoChoice).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2, 1);
   }
 
