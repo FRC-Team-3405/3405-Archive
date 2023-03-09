@@ -29,9 +29,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public final static Drivetrain m_drive = new Drivetrain(); // Drive
-  public final static Pneumatics m_pneumatics = new Pneumatics(); // Pneumatics
-  public final static Arm m_arm = new Arm(); // Arm
+  public final static Drivetrain m_drive = new Drivetrain(); // Drivetrain Subsystem
+  public final static Pneumatics m_pneumatics = new Pneumatics(); // Pneumatics Subsystem
+  public final static Arm m_arm = new Arm(); // Arm Subsystem
   private static SendableChooser<Command> m_autoChoice; // Autonomous Routine Chooser
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -75,7 +75,7 @@ public class RobotContainer {
     ShuffleboardTab autoTab = Shuffleboard.getTab("Auto");
     m_autoChoice = new SendableChooser<Command>();
     m_autoChoice.setDefaultOption("Long Auto", new LongAuto()); // Custom Sequence 1 (From Auto Routines)
-    // m_autoChoice.addOption("Custom 1", new X1()); // Custom Sequence 1 (From Auto Routines)
+    m_autoChoice.addOption("Arm Score Test", new AutoArmExtend(-0.5)); // Custom Sequence 1 (From Auto Routines)
     // m_autoChoice.addOption("Custom 2", new X2()); // Custom Sequence 2 (From Auto Routines)
     // m_autoChoice.addOption("Blue 1", new B1()); // Blue 1 (From Auto Routines)
     // m_autoChoice.addOption("Blue 2", new B2()); // Blue 2 (From Auto Routines)
@@ -84,8 +84,8 @@ public class RobotContainer {
     // m_autoChoice.addOption("Red 2", new R2()); // Red 2 (From Auto Routines)
     // m_autoChoice.addOption("Red 3", new R3()); // Red 3 (From Auto Routines)
     m_autoChoice.addOption("Short Auto", new ShortAuto());
-    m_autoChoice.addOption("LongAuto", new LongAuto());
-    m_autoChoice.addOption("BalanceAuto", new AutoBalance());
+    m_autoChoice.addOption("Long Auto", new LongAuto());
+    m_autoChoice.addOption("Balance Auto", new AutoBalance());
     m_autoChoice.addOption("Test", new LowGearSpinTest());
     autoTab.add("Auto Chooser", m_autoChoice).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2, 1);
   }
