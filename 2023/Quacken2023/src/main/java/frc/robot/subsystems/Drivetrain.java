@@ -40,7 +40,7 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon2.0
   private NetworkTableEntry pitchEntry;
   // Current Limits (TalonSRX)
-  void setTalonSRXLimit(WPI_TalonSRX talon) {
+  void setTalonLimit(WPI_TalonSRX talon) {
     talon.configPeakCurrentLimit(35, 10); // Limit the peak output to 35 Amps
     talon.configPeakCurrentDuration(200, 10); // Limit the peak current duration
     talon.configContinuousCurrentLimit(30, 10); // 30 Amp Draw
@@ -49,10 +49,10 @@ public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
   public Drivetrain() {
     rightMotors.setInverted(true);
-    setTalonSRXLimit(frontRight);
-    setTalonSRXLimit(backRight);
-    setTalonSRXLimit(frontLeft);
-    setTalonSRXLimit(backLeft);
+    setTalonLimit(frontRight);
+    setTalonLimit(backRight);
+    setTalonLimit(frontLeft);
+    setTalonLimit(backLeft);
     m_shift.set(Value.kForward);
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
