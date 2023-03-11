@@ -76,6 +76,7 @@ public class RobotContainer {
     m_autoChoice = new SendableChooser<Command>();
     m_autoChoice.setDefaultOption("Long Auto", new LongAuto()); // Custom Sequence 1 (From Auto Routines)
     m_autoChoice.addOption("Arm Score Test", new AutoArmExtend(-0.5)); // Custom Sequence 1 (From Auto Routines)
+    m_autoChoice.addOption("Custom 1", new X1()); // Custom Sequence 1 (From Auto Routines)
     // m_autoChoice.addOption("Custom 2", new X2()); // Custom Sequence 2 (From Auto Routines)
     // m_autoChoice.addOption("Blue 1", new B1()); // Blue 1 (From Auto Routines)
     // m_autoChoice.addOption("Blue 2", new B2()); // Blue 2 (From Auto Routines)
