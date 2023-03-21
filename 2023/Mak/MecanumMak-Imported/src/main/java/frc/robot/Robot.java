@@ -51,8 +51,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
   @Override
   public void teleopPeriodic() {
-    // Use the joystick X axis for lateral movement, Y axis for forward
-    // movement, and Z axis for rotation.
+    // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
     m_drive.driveCartesian(-m_stick.getY(), m_stick.getX(), m_stick.getRawAxis(3)); // Axis 3 on MadCatz Joystick
   }
   @Override
