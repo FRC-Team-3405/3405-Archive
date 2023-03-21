@@ -27,6 +27,10 @@ public class ArmControl extends CommandBase {
         ArmControl.rotateTarget - RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER < 12.5) {
       ArmControl.rotateTarget += -RobotContainer.m_operatorController.getLeftY()*AC.ROT_POWER;
     }
+    // if (ArmControl.extendTarget - RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER > -0.5 &&
+    //     ArmControl.extendTarget - RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER < 43){
+    //   ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
+    // } // Uncomment for extension limits when we have reeled the arm in
     ArmControl.extendTarget += -RobotContainer.m_operatorController.getRightY()*AC.EXT_POWER;
     RobotContainer.m_arm.setRotatePIDControl(ArmControl.rotateTarget);
     RobotContainer.m_arm.setExtendPIDControl(ArmControl.extendTarget);
