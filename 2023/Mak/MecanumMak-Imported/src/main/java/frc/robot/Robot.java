@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 
 public class Robot extends TimedRobot {
-  private static final int kFrontLeftChannel = 1; // was 3; // Front Left Motor
-  private static final int kRearLeftChannel = 3; // was 0; // Rear Left Motor
-  private static final int kFrontRightChannel = 2; // was 1; // Front Right Motor
-  private static final int kRearRightChannel = 0; // was 2; // Rear Right Motor
+  private static final int kFrontLeftChannel = 1; // was 3; // Front Left Motor Channel
+  private static final int kRearLeftChannel = 3; // was 0; // Rear Left Motor Channel
+  private static final int kFrontRightChannel = 2; // was 1; // Front Right Motor Channel
+  private static final int kRearRightChannel = 0; // was 2; // Rear Right Motor Channel
   private static final int kJoystickChannel = 0; // Joystick Port
   private MecanumDrive m_drive; // MecanumDrive Object
   private Joystick m_stick; // Joystick Object
