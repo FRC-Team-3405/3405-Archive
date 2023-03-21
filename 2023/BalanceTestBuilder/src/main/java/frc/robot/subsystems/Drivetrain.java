@@ -30,13 +30,13 @@ public class Drivetrain extends SubsystemBase {
   // Motors
   private final WPI_TalonFX frontRight = new WPI_TalonFX(2); // Front Right Talon FX
   private final WPI_TalonFX backRight = new WPI_TalonFX(3); // Back Right Talon FX
-  private final WPI_TalonFX middleRight = new WPI_TalonFX(4);
+  // private final WPI_TalonFX middleRight = new WPI_TalonFX(4);
   private final WPI_TalonFX frontLeft = new WPI_TalonFX(5); // Front Left Talon FX
   private final WPI_TalonFX backLeft = new WPI_TalonFX(6); // Back Left Talon FX
-  private final WPI_TalonFX middleLeft = new WPI_TalonFX(7);
+  // private final WPI_TalonFX middleLeft = new WPI_TalonFX(7);
   // Motor Controller Groups
-  private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight, middleRight); // Right Motors
-  private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft, middleLeft); // Left Motors
+  private final MotorControllerGroup rightMotors = new MotorControllerGroup(frontRight, backRight); // Right Motors
+  private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft); // Left Motors
   // Differential Drive
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   // Pigeon 2.0 IMU
@@ -54,14 +54,14 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     setFalconLimit(frontRight); // Set Falcon Current Limits (FR)
     setFalconLimit(backRight); // Set Falcon Current Limits (BR)
-    setFalconLimit(middleRight);
+    // setFalconLimit(middleRight);
     setFalconLimit(frontLeft); // Set Falcon Current Limits (FL)
     setFalconLimit(backLeft); // Set Falcon Current Limits (BL)
-    setFalconLimit(middleLeft);
+    // setFalconLimit(middleLeft);
     // rightMotors.setInverted(true); // Invert Right Motors
     frontRight.setInverted(true); // Invert the front-right motor
     backRight.setInverted(true); // Invert the back-right motor
-    middleLeft.setInverted(true);
+    // middleLeft.setInverted(true);
     // m_shift.set(Value.kReverse); // Set Shifter to High Gear
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
