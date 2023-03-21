@@ -23,8 +23,8 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
   /** Pneumatics */
-  private static Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM); // Compressor
-  public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.P_HIGHGEAR, Constants.P_LOWGEAR); // Shifter Solenoid
+  // private static Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM); // Compressor
+  // public static DoubleSolenoid m_shift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.P_HIGHGEAR, Constants.P_LOWGEAR); // Shifter Solenoid
   public static boolean LowGear = false; // Low Gear
   private NetworkTableEntry currentEntry; // Compressor Current Draw
   private NetworkTableEntry shiftEntry; // Shifter state
@@ -37,7 +37,7 @@ public class Drivetrain extends SubsystemBase {
   private final MotorControllerGroup leftMotors = new MotorControllerGroup(frontLeft, backLeft); // Left Motors
   private final DifferentialDrive m_drive = new DifferentialDrive(leftMotors, rightMotors); // Differential Drive
   /* Pigeon 2.0 */
-  private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon2.0
+  // private final WPI_Pigeon2 m_pigeon = new WPI_Pigeon2(Constants.P_PIGEON); // Pigeon2.0
   private NetworkTableEntry pitchEntry;
   // Current Limits (TalonSRX)
   void setTalonLimit(WPI_TalonSRX talon) {
@@ -53,7 +53,7 @@ public class Drivetrain extends SubsystemBase {
     setTalonLimit(backRight);
     setTalonLimit(frontLeft);
     setTalonLimit(backLeft);
-    m_shift.set(Value.kForward);
+    // m_shift.set(Value.kForward);
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("Pigeon2");
     pitchEntry = table.getEntry("Pitch");
@@ -71,7 +71,7 @@ public class Drivetrain extends SubsystemBase {
 
   // Shift Gears Method
   public void shift() {
-    m_shift.toggle();
+    // m_shift.toggle();
     LowGear = !LowGear;
   }
 
@@ -80,19 +80,19 @@ public class Drivetrain extends SubsystemBase {
     return LowGear;
   }
   // Get Compressor Current
-  public double getCurrent() {
-    return m_compressor.getCurrent();
-  }
+  // public double getCurrent() {
+    // return m_compressor.getCurrent();
+  // }
 
   // Get Compressor Operation State
-  public boolean getCompressorState() {
-    return m_compressor.isEnabled();
-  }
+  // public boolean getCompressorState() {
+  //   return m_compressor.isEnabled();
+  // }
 
   // Get Compressor Pressure Switch State
-  public boolean getPressureSwitch() {
-    return m_compressor.getPressureSwitchValue();
-  }
+  // public boolean getPressureSwitch() {
+  //   return m_compressor.getPressureSwitchValue();
+  // }
 
   public void arcadeDrive(double fwd, double rot) {
     m_drive.arcadeDrive(fwd, rot);
@@ -101,11 +101,11 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    double pitch = m_pigeon.getPitch();
-    pitchEntry.setDouble(pitch);
+    // double pitch = m_pigeon.getPitch();
+    // pitchEntry.setDouble(pitch);
     boolean shiftStatus = getShiftStatus();
     shiftEntry.setBoolean(shiftStatus);
-    double current = m_compressor.getCurrent();
-    currentEntry.setDouble(current);
+    // double current = m_compressor.getCurrent();
+    // currentEntry.setDouble(current);
   }
 }
