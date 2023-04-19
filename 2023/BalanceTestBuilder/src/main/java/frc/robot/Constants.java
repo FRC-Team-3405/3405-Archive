@@ -39,6 +39,6 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int P_XBOX = 0; // Controller Port
     public static final int XAXIS = 1; // X Axis on Xbox Controller
-    public static final int YAXIS = 0; // Y Axis on Xbox Controller
+    public static final int YAXIS = 4; // Y Axis on Xbox Controller
   }
 }

@@ -28,9 +28,12 @@ public final class Constants {
     // Motor Performance Values
     public static final double MAXMOVEPOWER = 0.8; // Maximum Fwd/Back Power (Percent)
     public static final double MAXTURNPOWER = 0.6; // Maximum Rotating Power (Percent)
-    public static final double AUTONAVSPEED = 0.65; // Maximum Moving Power (AUTO Flat Ground moving to Station, VOLTS)
-    public static final double AUTOBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
-    public static final double SECONDARYBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
+    // public static final double AUTONAVSPEED = 0.65; // Maximum Moving Power (AUTO Flat Ground moving to Station, VOLTS)
+    public static final double AUTONAVSPEED = 4.0; // Test for rewritten balancing methods
+    // public static final double AUTOBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
+    public static final double AUTOBALANCESPEED = 2.0; // test for rewritten balancing methods
+    // public static final double SECONDARYBALANCESPEED = 0.35; // Maximum Moving Power (AUTO Slope, VOLTS)
+    public static final double SECONDARYBALANCESPEED = 1.5; // test for rewritten balancing methods
     // Pigeon 2.0 Performance Variables
     public static final double MINSEEKPITCH = -8.0; // Minimum Pitch (Degrees, Seeking the Slope)
     public static final double MAXSEEKPITCH = 8.0; // Maximum Pitch (Degrees, Seeking the Slope)

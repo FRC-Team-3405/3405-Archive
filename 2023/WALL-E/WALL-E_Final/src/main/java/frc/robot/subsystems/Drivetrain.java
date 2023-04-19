@@ -87,7 +87,9 @@ public class Drivetrain extends SubsystemBase {
   }
   // Tank Drive Function
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    drive.tankDrive(leftVolts, rightVolts); // See BalanceTestBuilder's iteration - I'm not sure why this one is so much faster...
+    // drive.tankDrive(leftVolts, rightVolts);
+    leftMotors.setVoltage(leftVolts);
+    rightMotors.setVoltage(rightVolts);
     drive.feed();
   }
   // Set Brake Mode
